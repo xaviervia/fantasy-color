@@ -71,6 +71,7 @@ Color.of = (red = 0, green = 0, blue = 0, alpha = 1) => ({
   green,
   blue,
   alpha,
+  inspect: function () { return toRGBA(red, green, blue, alpha) },
   toRGBA: function () { return toRGBA(red, green, blue, alpha) },
   toString: function () { return toRGBA(red, green, blue, alpha) },
 })
