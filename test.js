@@ -132,4 +132,24 @@ module.exports = [
     test: () => Color.parseHex('#06EDFA').alpha,
     shouldEqual: 1,
   },
+  {
+    description: 'is able to parse a RGB color - test red',
+    test: () => Color.parseRgb('rgb( 45,  34, 12 )').red,
+    shouldEqual: 45,
+  },
+  {
+    description: 'is able to parse a RGB color - test green',
+    test: () => Color.parseRgb('rgb( 45,  34, 12 )').green,
+    shouldEqual: 34,
+  },
+  {
+    description: 'is able to parse a RGB color - test blue',
+    test: () => Color.parseRgb('rgb( 45,  34, 12 )').blue,
+    shouldEqual: 12,
+  },
+  {
+    description: 'is able to parse a RGB color - test alpha 1',
+    test: () => Color.parseRgb('rgb( 45,  34, 12 )').alpha,
+    shouldEqual: 1,
+  },
 ]

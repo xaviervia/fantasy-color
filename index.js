@@ -85,4 +85,12 @@ Color.parseHex = function (hex) {
   return Color.of(red, green, blue, 1)
 }
 
+Color.parseRgb = function (rgb) {
+  var parts = rgb.split('(')[1].split(')')[0].split(',')
+  var red = parseInt(parts[0], 10)
+  var green = parseInt(parts[1], 10)
+  var blue = parseInt(parts[2], 10)
+  return Color.of(red, green, blue, 1)
+}
+
 module.exports = Color
