@@ -67,15 +67,34 @@ function toRGBA(red, green, blue, alpha) {
 }
 
 Color.of = function (red, green, blue, alpha) {
+  red = red != null ? red : 0
+  green = green != null ? green : 0
+  blue = blue != null ? blue : 0
+  alpha = alpha != null ? alpha : 1
   return {
-    red: red != null ? red : 0,
-    green: green != null ? green : 0,
-    blue: blue != null ? blue : 0,
-    alpha: alpha != null ? alpha : 1,
+    red: red,
+    green: green,
+    blue: blue,
+    alpha: alpha,
+    brightness: function () { return Color.brightness(red, green, blue, alpha) },
     inspect: function () { return toRGBA(red, green, blue, alpha) },
     toRGBA: function () { return toRGBA(red, green, blue, alpha) },
     toString: function () { return toRGBA(red, green, blue, alpha) },
   }
+}
+
+// Magical weights for calculating perceived relative brightness
+// Taken from http://alienryderflex.com/hsp.html
+var RED_BRIGHTNESS_WEIGHT = 0.299
+var GREEN_BRIGHTNESS_WEIGHT = 0.587
+var BLUE_BRIGHTNESS_WEIGHT = 0.114
+
+Color.brightness = function (red, green, blue, alpha) {
+  return Math.sqrt(
+    Math.pow(red, 2) * RED_BRIGHTNESS_WEIGHT +
+    Math.pow(green, 2) * GREEN_BRIGHTNESS_WEIGHT +
+    Math.pow(blue, 2) * BLUE_BRIGHTNESS_WEIGHT
+  ) * alpha
 }
 
 module.exports = Color
