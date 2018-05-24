@@ -1,6 +1,6 @@
 {
   "name": "fantasy-color",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Fantasy Land type for CSS color",
   "main": "index.js",
   "repository": "git@github.com:xaviervia/fantasy-color",
