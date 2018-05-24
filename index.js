@@ -1,8 +1,8 @@
-const compose = require('ramda/src/compose')
-const map = require('ramda/src/map')
-const nth = require('ramda/src/nth')
-const split = require('ramda/src/split')
-const trim = require('ramda/src/trim')
+var compose = require('ramda/src/compose')
+var map = require('ramda/src/map')
+var nth = require('ramda/src/nth')
+var split = require('ramda/src/split')
+var trim = require('ramda/src/trim')
 
 function Color(input) {
   if (typeof input === 'string') {
@@ -66,14 +66,23 @@ function toRGBA(red, green, blue, alpha) {
   return "rgba(" + red + ", " + green + ", " + blue + ", " + alpha + ")"
 }
 
-Color.of = (red = 0, green = 0, blue = 0, alpha = 1) => ({
-  red,
-  green,
-  blue,
-  alpha,
-  inspect: function () { return toRGBA(red, green, blue, alpha) },
-  toRGBA: function () { return toRGBA(red, green, blue, alpha) },
-  toString: function () { return toRGBA(red, green, blue, alpha) },
-})
+Color.of = function (red, green, blue, alpha) {
+  return {
+    red: red != null ? red : 0,
+    green: green != null ? green : 0,
+    blue: blue != null ? blue : 0,
+    alpha: alpha != null ? alpha : 1,
+    inspect: function () { return toRGBA(red, green, blue, alpha) },
+    toRGBA: function () { return toRGBA(red, green, blue, alpha) },
+    toString: function () { return toRGBA(red, green, blue, alpha) },
+  }
+}
+
+Color.parseHex = function (hex) {
+  var red = parseInt(hex.slice(1,3), 16)
+  var green = parseInt(hex.slice(3,5), 16)
+  var blue = parseInt(hex.slice(5,7), 16)
+  return Color.of(red, green, blue, 1)
+}
 
 module.exports = Color

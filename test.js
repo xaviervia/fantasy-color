@@ -112,4 +112,24 @@ module.exports = [
     test: () => Color.of(250, 167, 23, 0.8).inspect(),
     shouldEqual: 'rgba(250, 167, 23, 0.8)',
   },
+  {
+    description: 'is able to parse a HEX color - test red',
+    test: () => Color.parseHex('#06EDFA').red,
+    shouldEqual: 0x06,
+  },
+  {
+    description: 'is able to parse a HEX color - test green',
+    test: () => Color.parseHex('#06EDFA').green,
+    shouldEqual: 0xED,
+  },
+  {
+    description: 'is able to parse a HEX color - test blue',
+    test: () => Color.parseHex('#06EDFA').blue,
+    shouldEqual: 0xFA,
+  },
+  {
+    description: 'is able to parse a HEX color - test alpha 1',
+    test: () => Color.parseHex('#06EDFA').alpha,
+    shouldEqual: 1,
+  },
 ]
