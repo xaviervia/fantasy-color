@@ -27,6 +27,9 @@ console.log(Color('rgba(23, 234, 67, .6)').toString())
 
 console.log(Color.of(250, 167, 23, 0.8))
 // > 'rgba(250, 167, 23, 0.8)'
+
+console.log(Color.of(250, 167, 23, 0.8).toHEX())
+// > '#FAA717'
 ```
 
 ### Brightness
