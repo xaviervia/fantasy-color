@@ -77,6 +77,7 @@ Color.of = function (red, green, blue, alpha) {
     blue: blue,
     alpha: alpha,
     brightness: function () { return Color.brightness(red, green, blue, alpha) },
+    toHEX: function () { return Color.toHEX(red, green, blue) },
     inspect: function () { return toRGBA(red, green, blue, alpha) },
     toRGBA: function () { return toRGBA(red, green, blue, alpha) },
     toString: function () { return toRGBA(red, green, blue, alpha) },
@@ -95,6 +96,13 @@ Color.brightness = function (red, green, blue, alpha) {
     Math.pow(green, 2) * GREEN_BRIGHTNESS_WEIGHT +
     Math.pow(blue, 2) * BLUE_BRIGHTNESS_WEIGHT
   ) * alpha
+}
+
+Color.toHEX = function (red, green, blue) {
+  return '#' +
+    red.toString(16).toUpperCase() +
+    green.toString(16).toUpperCase() +
+    blue.toString(16).toUpperCase()
 }
 
 module.exports = Color
