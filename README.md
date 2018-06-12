@@ -28,3 +28,14 @@ console.log(Color('rgba(23, 234, 67, .6)').toString())
 console.log(Color.of(250, 167, 23, 0.8))
 // > 'rgba(250, 167, 23, 0.8)'
 ```
+
+### Brightness
+
+Based on http://alienryderflex.com/hsp.html , there is a brightness function that you can use to calculate the perceived brightness of your color, in scale from 0 to 255:
+
+```js
+import Color from 'fantasy-color'
+
+console.log(Color('rgba(107, 66, 98, 0.7)').brightness())
+// > 58.87944216787384
+```
