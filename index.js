@@ -8,11 +8,12 @@ var trim = require('ramda/src/trim')
 function Color(input) {
   if (typeof input === 'string') {
     if (input[0] === '#') {
-      const colors = [
-        input.slice(1, 3),
-        input.slice(3, 5),
-        input.slice(5, 7)
-      ]
+      if (input.length === 7) {
+        const colors = [
+          input.slice(1, 3),
+          input.slice(3, 5),
+          input.slice(5, 7)
+        ]
         .map(function (x) { return parseInt(x, 16) })
         .reduce(function (acc, color) {
           if (acc === undefined) {
@@ -22,10 +23,17 @@ function Color(input) {
           return isNaN(color) ? undefined : acc.concat(color)
         }, [])
 
-      return colors === undefined
+        return colors === undefined
         ? undefined
         : Color.of.apply(null, colors)
+      }
+
+      return undefined
     } else if (input.slice(0, 4) === 'rgba') {
+      if (input.indexOf('(') === -1 || input.indexOf(')') === -1) {
+        return undefined
+      }
+
       const colors = compose(
         reduce(
           function (acc, color) {
@@ -57,7 +65,20 @@ function Color(input) {
         ? undefined
         : Color.of.apply(null, colors)
     } else if (input.slice(0, 3) === 'rgb') {
+      if (input.indexOf('(') === -1 || input.indexOf(')') === -1) {
+        return undefined
+      }
+
       const colors = compose(
+        reduce(
+          function (acc, color) {
+            if (acc === undefined) {
+              return undefined
+            }
+
+            return isNaN(color) ? undefined : acc.concat(color)
+          }, []
+        ),
         map(
           compose(
             function (x) {
@@ -73,9 +94,13 @@ function Color(input) {
         split('(')
       )(input)
 
-      return colors.length === 3
-        ? Color.of.apply(null, colors)
-        : undefined
+      return colors === undefined
+        ? undefined
+        : (
+          colors.length === 3
+            ? Color.of.apply(null, colors)
+            : undefined
+        )
     }
   } else {
     return Color.of.apply(
