@@ -14,7 +14,7 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         colorWhileEditing: action.payload,
-        color: maybeColor === undefined ? state.color : action.payload
+        color: maybeColor === undefined ? state.color : action.payload,
       }
     }
 
@@ -23,15 +23,15 @@ export const reducer = (state = initialState, action) => {
 
       return maybeColor === undefined
         ? {
-          ...state,
-          initialized: true,
-        }
+            ...state,
+            initialized: true,
+          }
         : {
-          ...state,
-          colorWhileEditing: action.payload,
-          color: action.payload,
-          initialized: true,
-        }
+            ...state,
+            colorWhileEditing: action.payload,
+            color: action.payload,
+            initialized: true,
+          }
     }
 
     case 'INITIALIZE': {

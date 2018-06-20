@@ -1,4 +1,4 @@
-const updateHash = (color) => {
+const updateHash = color => {
   if (global !== undefined) {
     global.location.hash = `#${color}`
   }

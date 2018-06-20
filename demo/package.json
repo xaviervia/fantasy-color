@@ -3,16 +3,22 @@
     "@primitives/layout": "^0.3.1",
     "elegir": "^0.1.2",
     "hoc-with-store": "^0.1.0",
-    "next": "^6.0.3",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "recompose": "^0.27.1",
     "redux": "^4.0.0",
-    "redux-heat": "^0.4.0"
+    "redux-heat": "^0.4.0",
+    "sagui": "^11.5.0"
   },
   "scripts": {
-    "dev": "next",
-    "build": "next build",
-    "start": "next start"
+    "build": "sagui build",
+    "dist": "sagui dist",
+    "format": "sagui format",
+    "start": "sagui develop --port 3000",
+    "test": "sagui test",
+    "test:lint": "sagui test:lint",
+    "test:typecheck": "sagui test:typecheck",
+    "test:unit": "sagui test:unit --coverage",
+    "test:unit:watch": "sagui test:unit --watch"
   }
 }
