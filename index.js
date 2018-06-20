@@ -1,5 +1,6 @@
 var compose = require('ramda/src/compose')
 var map = require('ramda/src/map')
+var reduce = require('ramda/src/reduce')
 var nth = require('ramda/src/nth')
 var split = require('ramda/src/split')
 var trim = require('ramda/src/trim')
@@ -7,52 +8,74 @@ var trim = require('ramda/src/trim')
 function Color(input) {
   if (typeof input === 'string') {
     if (input[0] === '#') {
-      return Color.of.apply(
-        null,
-        [input.slice(1, 3), input.slice(3, 5), input.slice(5, 7)]
-          .map(function (x) { return parseInt(x, 16) })
-          .concat(1)
-      )
+      const colors = [
+        input.slice(1, 3),
+        input.slice(3, 5),
+        input.slice(5, 7)
+      ]
+        .map(function (x) { return parseInt(x, 16) })
+        .reduce(function (acc, color) {
+          if (acc === undefined) {
+            return undefined
+          }
+
+          return isNaN(color) ? undefined : acc.concat(color)
+        }, [])
+
+      return colors === undefined
+        ? undefined
+        : Color.of.apply(null, colors)
     } else if (input.slice(0, 4) === 'rgba') {
-      return Color.of.apply(
-        null,
-        compose(
-          map(
-            compose(
-              function (x) {
-                return x.indexOf('.') !== -1
-                  ? parseFloat(x, 10)
-                  : parseInt(x, 10)
-              },
-              trim
-            )
-          ),
-          split(','),
-          nth(0),
-          split(')'),
-          nth(1),
-          split('(')
-        )(input)
-      )
+      const colors = compose(
+        reduce(
+          function (acc, color) {
+            if (acc === undefined) {
+              return undefined
+            }
+
+            return isNaN(color) ? undefined : acc.concat(color)
+          }, []
+        ),
+        map(
+          compose(
+            function (x) {
+              return x.indexOf('.') !== -1
+              ? parseFloat(x, 10)
+              : parseInt(x, 10)
+            },
+            trim
+          )
+        ),
+        split(','),
+        nth(0),
+        split(')'),
+        nth(1),
+        split('(')
+      )(input)
+
+      return colors === undefined
+        ? undefined
+        : Color.of.apply(null, colors)
     } else if (input.slice(0, 3) === 'rgb') {
-      return Color.of.apply(
-        null,
-        compose(
-          map(
-            compose(
-              function (x) {
-                return parseInt(x, 10)
-              },
-              trim
-            )
-          ),
-          split(','),
-          nth(0),
-          split(')'),
-          nth(1),
-          split('(')
-        )(input)
-      )
+      const colors = compose(
+        map(
+          compose(
+            function (x) {
+              return parseInt(x, 10)
+            },
+            trim
+          )
+        ),
+        split(','),
+        nth(0),
+        split(')'),
+        nth(1),
+        split('(')
+      )(input)
+
+      return colors.length === 3
+        ? Color.of.apply(null, colors)
+        : undefined
     }
   } else {
     return Color.of.apply(

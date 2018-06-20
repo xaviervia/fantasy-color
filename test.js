@@ -43,6 +43,11 @@ module.exports = [
     shouldEqual: 1,
   },
   {
+    description: 'builds from hex - incomplete is undefined',
+    test: () => Color('#45'),
+    shouldEqual: undefined,
+  },
+  {
     description: 'builds from rgb - test red',
     test: () => Color('rgb(23, 234, 67)').red,
     shouldEqual: 23,
@@ -63,6 +68,11 @@ module.exports = [
     shouldEqual: 1,
   },
   {
+    description: 'builds from rgb - incomplete is undefined',
+    test: () => Color('rgb(2'),
+    shouldEqual: undefined,
+  },
+  {
     description: 'builds from rgba - test red',
     test: () => Color('rgba(23, 234, 67, .6)').red,
     shouldEqual: 23,
@@ -81,6 +91,11 @@ module.exports = [
     description: 'builds from rgba - test alpha',
     test: () => Color('rgba(23, 234, 67, .6)').alpha,
     shouldEqual: 0.6,
+  },
+  {
+    description: 'builds from rgba - incomplete is undefined',
+    test: () => Color('rgba(2, 32, 2,'),
+    shouldEqual: undefined,
   },
   {
     description: 'builds from .of - test red',
