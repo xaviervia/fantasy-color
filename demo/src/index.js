@@ -8,6 +8,7 @@ import hashHeat from './heats/hash'
 import getHashDispatcher from './dispatchers/hash'
 import Color from '../../'
 import App from './App'
+import { getFantasyColor } from './selectors'
 
 const store = createStore(
   reducer,
@@ -24,16 +25,46 @@ if (global !== undefined && global.addEventListener !== undefined) {
 
 hashDispatcher()
 
+const red = (brightness, green, blue) =>
+  Math.round(
+    Math.sqrt(
+      (Math.pow(brightness, 2) - Math.pow(blue, 2) * 0.114 - Math.pow(green, 2) * 0.587) / 0.299
+    )
+  )
+
+const green = (brightness, red, blue) =>
+  Math.round(
+    Math.sqrt(
+      (Math.pow(brightness, 2) - Math.pow(red, 2) * 0.299 - Math.pow(blue, 2) * 0.114) / 0.587
+    )
+  )
+
+const blue = (brightness, red, green) =>
+  Math.round(
+    Math.sqrt(
+      (Math.pow(brightness, 2) - Math.pow(red, 2) * 0.299 - Math.pow(green, 2) * 0.587) / 0.114
+    )
+  )
+
 const ConnectedApp = withStore(
   store,
-  ({ color, colorWhileEditing, initialized }) => {
-    const fantasyColor = Color(color)
+  state => {
+    const { color, colorWhileEditing, initialized } = state
+    const fantasyColor = getFantasyColor(state)
     const brightness = fantasyColor.brightness()
     const equivalentBrightnessFantasyColor = Color.of(
       Math.round(brightness),
       Math.round(brightness),
       Math.round(brightness),
       1
+    )
+
+    const aBitDifferentRed = red(brightness, fantasyColor.green + 5, fantasyColor.blue)
+    const aBitDifferent = Color.of(
+      aBitDifferentRed,
+      fantasyColor.green,
+      fantasyColor.blue,
+      fantasyColor.alpha
     )
 
     return {
@@ -43,6 +74,8 @@ const ConnectedApp = withStore(
       fantasyColor,
       brightness,
       equivalentBrightnessFantasyColor,
+      aBitDifferentRed,
+      aBitDifferent,
     }
   },
   dispatch => ({

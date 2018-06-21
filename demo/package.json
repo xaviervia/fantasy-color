@@ -3,12 +3,14 @@
     "@primitives/layout": "^0.3.1",
     "elegir": "^0.1.2",
     "hoc-with-store": "^0.1.0",
+    "immutable": "^3.8.2",
     "react": "^16.4.1",
     "react-color": "^2.14.1",
     "react-dom": "^16.4.1",
     "recompose": "^0.27.1",
     "redux": "^4.0.0",
     "redux-heat": "^0.4.0",
+    "reselect": "^3.0.1",
     "sagui": "^11.5.0"
   },
   "scripts": {

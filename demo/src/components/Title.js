@@ -5,10 +5,10 @@ export default ({ children }) => (
   <h1
     style={{
       fontFamily,
-      fontSize: 20,
+      fontSize: 30,
       fontWeight: 500,
       margin: 0,
-      lineHeight: '30px',
+      lineHeight: '40px',
     }}
   >
     {children}

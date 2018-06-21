@@ -15,6 +15,8 @@ export default ({
   initialized,
   colorWhileEditing,
   brightness,
+  aBitDifferent,
+  aBitDifferentRed,
   color,
   equivalentBrightnessFantasyColor,
   fantasyColor,
@@ -36,9 +38,14 @@ export default ({
       <BodyText>
         Equivalently bright <Strong>{equivalentBrightnessFantasyColor.toHEX()}</Strong>
       </BodyText>
+      <BodyText>
+        Equivalently bright 2 <Strong>{aBitDifferent.toHEX()}</Strong>
+      </BodyText>
       <SpacerVertical medium />
       <Layout style={{ flexDirection: 'row' }}>
         <Swatch color={color} />
+        <SpacerHorizontal small />
+        <Swatch color={aBitDifferent.toString()} />
         <SpacerHorizontal small />
         <Swatch color={equivalentBrightnessFantasyColor.toString()} />
       </Layout>
