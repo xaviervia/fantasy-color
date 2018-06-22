@@ -54,7 +54,7 @@ export const getSpectrumOfEquivalents = createSelector(getBrightness, brightness
   const nudgingBlueUp = nextOnesNudgingBlueUp(brightness, List(), seed)
   const nudgingBlueDown = nextOnesNudgingBlueDown(brightness, List(), seed)
 
-  const spectrumOfEquivalents = nudgingBlueDown.reverse().concat(nudgingBlueUp.slice(1))
+  const spectrumOfEquivalents = nudgingBlueDown.reverse().concat(nudgingBlueUp)
   console.log(spectrumOfEquivalents)
   global.spectrumOfEquivalents = spectrumOfEquivalents
 
@@ -86,7 +86,7 @@ const nextOnesNudgingBlueUp = (brightness, collectedNextOnes, seed) => {
       List().push(nextSeed)
     )
 
-    const nextOne = decreasingGreen.reverse().concat(increasingGreen.slice(1))
+    const nextOne = decreasingGreen.reverse().concat(increasingGreen)
 
     if (nextOne.size > 0) {
       return nextOnesNudgingBlueUp(brightness, collectedNextOnes.push(nextOne), nextSeed)
@@ -122,7 +122,7 @@ const nextOnesNudgingBlueDown = (brightness, collectedNextOnes, seed) => {
       List().push(nextSeed)
     )
 
-    const nextOne = decreasingGreen.reverse().concat(increasingGreen.slice(1))
+    const nextOne = decreasingGreen.reverse().concat(increasingGreen)
 
     if (nextOne.size > 0) {
       return nextOnesNudgingBlueDown(brightness, collectedNextOnes.push(nextOne), nextSeed)
