@@ -1,11 +1,13 @@
 import React from 'react'
 import Layout from '@primitives/layout'
 import { SketchPicker } from 'react-color'
+import Color from '../../'
 import BodyText from './components/BodyText'
 import Container from './components/Container'
 import Input from './components/Input'
 import SpacerHorizontal from './components/SpacerHorizontal'
 import SpacerVertical from './components/SpacerVertical'
+import Spectrum from './components/Spectrum'
 import Strong from './components/Strong'
 import Swatch from './components/Swatch'
 import Title from './components/Title'
@@ -15,13 +17,15 @@ export default ({
   initialized,
   colorWhileEditing,
   brightness,
-  aBitDifferent,
-  aBitDifferentRed,
   color,
-  equivalentBrightnessFantasyColor,
-  fantasyColor,
+  equivalentBrightnessColor,
+  colorObject,
+  hoveredAltColor,
   onColorChange,
+  onSetColor,
+  onHoverColor,
   onColorChangeFromPicker,
+  spectrumOfEquivalents,
 }) =>
   initialized ? (
     <Container>
@@ -36,26 +40,28 @@ export default ({
         Brightness <Strong>{Math.floor(brightness * 100) / 100}</Strong> / 255
       </BodyText>
       <BodyText>
-        Equivalently bright <Strong>{equivalentBrightnessFantasyColor.toHEX()}</Strong>
-      </BodyText>
-      <BodyText>
-        Equivalently bright 2 <Strong>{aBitDifferent.toHEX()}</Strong>
+        Equivalently bright <Strong>{equivalentBrightnessColor}</Strong>
       </BodyText>
       <SpacerVertical medium />
       <Layout style={{ flexDirection: 'row' }}>
         <Swatch color={color} />
         <SpacerHorizontal small />
-        <Swatch color={aBitDifferent.toString()} />
-        <SpacerHorizontal small />
-        <Swatch color={equivalentBrightnessFantasyColor.toString()} />
+        <Swatch color={equivalentBrightnessColor} />
       </Layout>
+      <SpacerVertical small />
+      <BodyText>{hoveredAltColor} - {Color(hoveredAltColor).brightness()}</BodyText>
+        <Spectrum
+          onColorChange={onSetColor}
+          spectrum={spectrumOfEquivalents}
+          onColorHover={onHoverColor}
+        />
       <SpacerVertical medium />
       <SketchPicker
         color={{
-          r: fantasyColor.red,
-          g: fantasyColor.green,
-          b: fantasyColor.blue,
-          a: fantasyColor.alpha,
+          r: colorObject.get('red'),
+          g: colorObject.get('green'),
+          b: colorObject.get('blue'),
+          a: colorObject.get('alpha'),
         }}
         onChangeComplete={onColorChangeFromPicker}
       />
@@ -63,35 +69,35 @@ export default ({
       <TitleTwo>Brightness calculation break down</TitleTwo>
       <SpacerVertical small />
       <BodyText light>
-        sqrt( <Strong>{fantasyColor.red}</Strong> ^ 2 * 0.299 +{' '}
-        <Strong>{fantasyColor.green}</Strong> ^ 2 * 0.587 + <Strong>{fantasyColor.blue}</Strong> ^ 2
-        * 0.114 )
+        sqrt( <Strong>{colorObject.get('red')}</Strong> ^ 2 * 0.299 +{' '}
+        <Strong>{colorObject.get('green')}</Strong> ^ 2 * 0.587 +{' '}
+        <Strong>{colorObject.get('blue')}</Strong> ^ 2 * 0.114 )
       </BodyText>
       <BodyText light>
-        sqrt( <Strong>{Math.pow(fantasyColor.red, 2)}</Strong> * 0.299 +{' '}
-        <Strong>{Math.pow(fantasyColor.green, 2)}</Strong> * 0.587 +{' '}
-        <Strong>{Math.pow(fantasyColor.blue, 2)}</Strong> * 0.114 )
+        sqrt( <Strong>{Math.pow(colorObject.get('red'), 2)}</Strong> * 0.299 +{' '}
+        <Strong>{Math.pow(colorObject.get('green'), 2)}</Strong> * 0.587 +{' '}
+        <Strong>{Math.pow(colorObject.get('blue'), 2)}</Strong> * 0.114 )
       </BodyText>
       <BodyText light>
-        sqrt( <Strong>{Math.pow(fantasyColor.red, 2) * 0.299}</Strong> +{' '}
-        <Strong>{Math.pow(fantasyColor.green, 2) * 0.587}</Strong> +{' '}
-        <Strong>{Math.pow(fantasyColor.blue, 2) * 0.114}</Strong> )
+        sqrt( <Strong>{Math.pow(colorObject.get('red'), 2) * 0.299}</Strong> +{' '}
+        <Strong>{Math.pow(colorObject.get('green'), 2) * 0.587}</Strong> +{' '}
+        <Strong>{Math.pow(colorObject.get('blue'), 2) * 0.114}</Strong> )
       </BodyText>
       <BodyText light>
         sqrt({' '}
         <Strong>
-          {Math.pow(fantasyColor.red, 2) * 0.299 +
-            Math.pow(fantasyColor.green, 2) * 0.587 +
-            Math.pow(fantasyColor.blue, 2) * 0.114}
+          {Math.pow(colorObject.get('red'), 2) * 0.299 +
+            Math.pow(colorObject.get('green'), 2) * 0.587 +
+            Math.pow(colorObject.get('blue'), 2) * 0.114}
         </Strong>{' '}
         )
       </BodyText>
       <BodyText light>
         <Strong>
           {Math.sqrt(
-            Math.pow(fantasyColor.red, 2) * 0.299 +
-              Math.pow(fantasyColor.green, 2) * 0.587 +
-              Math.pow(fantasyColor.blue, 2) * 0.114
+            Math.pow(colorObject.get('red'), 2) * 0.299 +
+              Math.pow(colorObject.get('green'), 2) * 0.587 +
+              Math.pow(colorObject.get('blue'), 2) * 0.114
           )}
         </Strong>
       </BodyText>

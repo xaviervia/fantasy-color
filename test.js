@@ -152,4 +152,10 @@ module.exports = [
     test: () => Color.of(250, 167, 23, 0.8).toHEX(),
     shouldEqual: '#FAA717',
   },
+  {
+    description: 'toHEX is super buggy',
+  },
+  {
+    description: 'toRGB',
+  },
 ]

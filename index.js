@@ -110,10 +110,6 @@ function Color(input) {
   }
 }
 
-function toRGBA(red, green, blue, alpha) {
-  return "rgba(" + red + ", " + green + ", " + blue + ", " + alpha + ")"
-}
-
 Color.of = function (red, green, blue, alpha) {
   red = red != null ? red : 0
   green = green != null ? green : 0
@@ -126,9 +122,9 @@ Color.of = function (red, green, blue, alpha) {
     alpha: alpha,
     brightness: function () { return Color.brightness(red, green, blue, alpha) },
     toHEX: function () { return Color.toHEX(red, green, blue) },
-    inspect: function () { return toRGBA(red, green, blue, alpha) },
-    toRGBA: function () { return toRGBA(red, green, blue, alpha) },
-    toString: function () { return toRGBA(red, green, blue, alpha) },
+    inspect: function () { return Color.toRGBA(red, green, blue, alpha) },
+    toRGBA: function () { return Color.toRGBA(red, green, blue, alpha) },
+    toString: function () { return Color.toRGBA(red, green, blue, alpha) },
   }
 }
 
@@ -144,6 +140,14 @@ Color.brightness = function (red, green, blue, alpha) {
     Math.pow(green, 2) * GREEN_BRIGHTNESS_WEIGHT +
     Math.pow(blue, 2) * BLUE_BRIGHTNESS_WEIGHT
   ) * alpha
+}
+
+Color.toRGBA = function (red, green, blue, alpha) {
+  return "rgba(" + red + ", " + green + ", " + blue + ", " + alpha + ")"
+}
+
+Color.toRGB = function (red, green, blue) {
+  return "rgb(" + red + ", " + green + ", " + blue + ")"
 }
 
 Color.toHEX = function (red, green, blue) {

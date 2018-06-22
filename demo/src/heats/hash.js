@@ -6,5 +6,5 @@ const updateHash = color => {
 
 export default state => ({
   fn: updateHash,
-  args: [state.color],
+  args: [state.get('color')],
 })

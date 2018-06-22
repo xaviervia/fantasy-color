@@ -8,7 +8,7 @@ import hashHeat from './heats/hash'
 import getHashDispatcher from './dispatchers/hash'
 import Color from '../../'
 import App from './App'
-import { getFantasyColor } from './selectors'
+import * as selectors from './selectors'
 
 const store = createStore(
   reducer,
@@ -25,60 +25,29 @@ if (global !== undefined && global.addEventListener !== undefined) {
 
 hashDispatcher()
 
-const red = (brightness, green, blue) =>
-  Math.round(
-    Math.sqrt(
-      (Math.pow(brightness, 2) - Math.pow(blue, 2) * 0.114 - Math.pow(green, 2) * 0.587) / 0.299
-    )
-  )
-
-const green = (brightness, red, blue) =>
-  Math.round(
-    Math.sqrt(
-      (Math.pow(brightness, 2) - Math.pow(red, 2) * 0.299 - Math.pow(blue, 2) * 0.114) / 0.587
-    )
-  )
-
-const blue = (brightness, red, green) =>
-  Math.round(
-    Math.sqrt(
-      (Math.pow(brightness, 2) - Math.pow(red, 2) * 0.299 - Math.pow(green, 2) * 0.587) / 0.114
-    )
-  )
-
 const ConnectedApp = withStore(
   store,
-  state => {
-    const { color, colorWhileEditing, initialized } = state
-    const fantasyColor = getFantasyColor(state)
-    const brightness = fantasyColor.brightness()
-    const equivalentBrightnessFantasyColor = Color.of(
-      Math.round(brightness),
-      Math.round(brightness),
-      Math.round(brightness),
-      1
-    )
-
-    const aBitDifferentRed = red(brightness, fantasyColor.green + 5, fantasyColor.blue)
-    const aBitDifferent = Color.of(
-      aBitDifferentRed,
-      fantasyColor.green,
-      fantasyColor.blue,
-      fantasyColor.alpha
-    )
-
-    return {
-      initialized,
-      colorWhileEditing,
-      color,
-      fantasyColor,
-      brightness,
-      equivalentBrightnessFantasyColor,
-      aBitDifferentRed,
-      aBitDifferent,
-    }
-  },
+  state => ({
+    initialized: state.get('initialized'),
+    colorWhileEditing: state.get('colorWhileEditing'),
+    color: state.get('color'),
+    colorObject: selectors.getColorObject(state),
+    hoveredAltColor: state.get('hoveredAltColor'),
+    brightness: selectors.getBrightness(state),
+    equivalentBrightnessColor: selectors.getEquivalentBrightnessColor(state),
+    spectrumOfEquivalents: selectors.getSpectrumOfEquivalents(state),
+  }),
   dispatch => ({
+    onSetColor: value =>
+      dispatch({
+        type: 'COLOR_CHANGE',
+        payload: value,
+      }),
+    onHoverColor: value =>
+      dispatch({
+        type: 'HOVER_ALT_COLOR',
+        payload: value,
+      }),
     onColorChange: ({ target: { value } }) =>
       dispatch({
         type: 'COLOR_CHANGE',
