@@ -49,12 +49,14 @@ export default ({
         <Swatch color={equivalentBrightnessColor} />
       </Layout>
       <SpacerVertical small />
-      <BodyText>{hoveredAltColor} - {Color(hoveredAltColor).brightness()}</BodyText>
-        <Spectrum
-          onColorChange={onSetColor}
-          spectrum={spectrumOfEquivalents}
-          onColorHover={onHoverColor}
-        />
+      <BodyText>
+        {hoveredAltColor} - {Color(hoveredAltColor).brightness()}
+      </BodyText>
+      <Spectrum
+        onColorChange={onSetColor}
+        spectrum={spectrumOfEquivalents}
+        onColorHover={onHoverColor}
+      />
       <SpacerVertical medium />
       <SketchPicker
         color={{

@@ -12,9 +12,9 @@ const cube = (geometry, color) => {
     color: Color.toRGB(color.get('red'), color.get('green'), color.get('blue'))
   } )
   const cube = new Mesh( geometry, material )
-  cube.position.x = (color.get('red'))
-  cube.position.y = (color.get('green'))
-  cube.position.z = color.get('blue')
+  cube.position.x = (color.get('red')) / 2
+  cube.position.y = (color.get('green')) / 2
+  cube.position.z = color.get('blue') / 2
   return cube
 }
 
@@ -23,17 +23,18 @@ class Spectrum extends Component {
     super()
 
     // this.camera = new PerspectiveCamera( 75, width/height, 1, 1000 );
-    this.camera = new OrthographicCamera( -100, 100, -100, 100, 1, 3000 );
+    this.camera = new OrthographicCamera( -600, 600, -600, 600, 1,5000 );
 		// this.camera.position.z = 5;
-		this.camera.position.z = 1400;
-		this.camera.position.y = 1400;
-		this.camera.position.x = 1400;
+		// this.camera.position.z = 1000;
+		// this.camera.position.y = Math.sin(1) * 500;
+		// this.camera.position.x = Math.cos(1) * 1000;
 		// this.camera.position.y = 450;
 		// this.camera.position.x = 450;
     //
-    this.camera.rotation.y = 0.62;
-    this.camera.rotation.x = -0.78;
-    // this.camera.rotation.z = -0.3;
+    this.camera.lookAt( 128, 128, 128);
+    // this.camera.rotation.z = - (Math.PI * 0.125);
+    // this.camera.rotation.y = 0.62;
+    // this.camera.rotation.x = -0.78;
 
     this.renderer = new WebGLRenderer();
     this.renderer.setSize( width, height );
@@ -106,19 +107,17 @@ this.scene.add(cube2)
   // }
 
   handleMouseMove (e) {
-    			// this.camera.rotation.x += e.clientX / 1000
-    			// this.camera.rotation.y += e.clientY / 1000
-
-    const relativeLeft = (width / 2) - (e.clientX - this.boundingClientRect.left)
-    const relativeTop = (height / 2) - (e.clientY - this.boundingClientRect.top)
+    const relativeLeft = (((e.clientX - this.boundingClientRect.left) - width / 2) / width) * 2
+    const relativeTop = (((e.clientY - this.boundingClientRect.top) - height / 2) / height) * 2
     console.log('relativeLeft', relativeLeft)
     console.log('relativeTop', relativeTop)
 
-    this.camera.position.x = 1400 + relativeLeft / 200
-    this.camera.position.y = 1400  -(relativeTop / 200)
+		this.camera.position.x = Math.cos(Math.PI * relativeLeft) * 100;
+		// this.camera.position.y = Math.sin(Math.PI * relativeLeft) * 10;
+		// this.camera.position.y = Math.cos(Math.PI * relativeTop) * 1000;
 
-    this.camera.rotation.y = 0.62  - (relativeLeft / 1000)
-    this.camera.rotation.x = -0.78 - (relativeTop / 1000)
+    this.camera.lookAt( 128, 128, 128);
+
     this.renderer.render( this.scene, this.camera )
   }
 
