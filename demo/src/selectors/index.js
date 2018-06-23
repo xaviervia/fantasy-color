@@ -43,6 +43,9 @@ export const getEquivalentBrightnessColor = createSelector(getBrightness, bright
   Color.toHEX(Math.round(brightness), Math.round(brightness), Math.round(brightness))
 )
 
+// TODO:
+// - Are there duplicates?
+
 export const getSpectrumOfEquivalents = createSelector(getBrightness, brightness => {
   const roundedBrightness = Math.round(brightness)
   const seed = Map({
@@ -51,17 +54,22 @@ export const getSpectrumOfEquivalents = createSelector(getBrightness, brightness
     blue: roundedBrightness,
   })
 
-  const nudgingBlueUp = nextOnesNudgingBlueUp(brightness, List(), seed)
-  const nudgingBlueDown = nextOnesNudgingBlueDown(brightness, List(), seed)
+  const nudgingBlueUpByAffectingRed = nextOnesNudgingBlueUpByAffectingRed(brightness, List(), seed)
+  const nudgingBlueDownByAffectingRed = nextOnesNudgingBlueDownByAffectingRed(brightness, List(), seed)
 
-  const spectrumOfEquivalents = nudgingBlueDown.reverse().concat(nudgingBlueUp)
-  console.log(spectrumOfEquivalents)
+  const nudgingBlueUpByAffectingGreen = nextOnesNudgingBlueUpByAffectingGreen(brightness, List(), seed)
+  const nudgingBlueDownByAffectingGreen = nextOnesNudgingBlueDownByAffectingGreen(brightness, List(), seed)
+
+  const spectrumOfEquivalents = nudgingBlueDownByAffectingRed.reverse().concat(nudgingBlueUpByAffectingRed)
+  .concat(nudgingBlueDownByAffectingGreen.reverse().concat(nudgingBlueUpByAffectingGreen))
+  .reduce((a, b) => a.concat(b), List())
+
   global.spectrumOfEquivalents = spectrumOfEquivalents
 
   return spectrumOfEquivalents
 })
 
-const nextOnesNudgingBlueUp = (brightness, collectedNextOnes, seed) => {
+const nextOnesNudgingBlueUpByAffectingRed = (brightness, collectedNextOnes, seed) => {
   console.log('nudgingBlueUp', brightness)
   const nextOnes =
     collectedNextOnes.size === 0
@@ -73,6 +81,8 @@ const nextOnesNudgingBlueUp = (brightness, collectedNextOnes, seed) => {
   const nextSeed = Map({
     red: red(brightness, seed.get('green'), seed.get('blue') + 1),
     green: seed.get('green'),
+    // red: seed.get('red'),
+    // green: green(brightness, seed.get('red'), seed.get('blue') + 1),
     blue: seed.get('blue') + 1,
   })
 
@@ -89,7 +99,7 @@ const nextOnesNudgingBlueUp = (brightness, collectedNextOnes, seed) => {
     const nextOne = decreasingGreen.reverse().concat(increasingGreen)
 
     if (nextOne.size > 0) {
-      return nextOnesNudgingBlueUp(brightness, collectedNextOnes.push(nextOne), nextSeed)
+      return nextOnesNudgingBlueUpByAffectingRed(brightness, collectedNextOnes.push(nextOne), nextSeed)
     } else {
       return collectedNextOnes
     }
@@ -98,7 +108,8 @@ const nextOnesNudgingBlueUp = (brightness, collectedNextOnes, seed) => {
   }
 }
 
-const nextOnesNudgingBlueDown = (brightness, collectedNextOnes, seed) => {
+const nextOnesNudgingBlueUpByAffectingGreen = (brightness, collectedNextOnes, seed) => {
+  console.log('nudgingBlueUp', brightness)
   const nextOnes =
     collectedNextOnes.size === 0
       ? collectedNextOnes.push(
@@ -107,8 +118,48 @@ const nextOnesNudgingBlueDown = (brightness, collectedNextOnes, seed) => {
       : collectedNextOnes
 
   const nextSeed = Map({
-    red: red(brightness, seed.get('green'), seed.get('blue') - 1),
+    // red: red(brightness, seed.get('green'), seed.get('blue') + 1),
+    // green: seed.get('green'),
+    red: seed.get('red'),
+    green: green(brightness, seed.get('red'), seed.get('blue') + 1),
+    blue: seed.get('blue') + 1,
+  })
+
+  if (nextSeed.get('blue') < 256 && !isNaN(nextSeed.get('red')) && nextSeed.get('red') < 256) {
+    const decreasingGreen = nextOnesDecreasingGreenAndModifyingRed(
+      brightness,
+      List().push(nextSeed)
+    )
+    const increasingGreen = nextOnesIncreasingGreenAndModifyingRed(
+      brightness,
+      List().push(nextSeed)
+    )
+
+    const nextOne = decreasingGreen.reverse().concat(increasingGreen)
+
+    if (nextOne.size > 0) {
+      return nextOnesNudgingBlueUpByAffectingGreen(brightness, collectedNextOnes.push(nextOne), nextSeed)
+    } else {
+      return collectedNextOnes
+    }
+  } else {
+    return collectedNextOnes
+  }
+}
+
+const nextOnesNudgingBlueDownByAffectingRed = (brightness, collectedNextOnes, seed) => {
+  const nextOnes =
+    collectedNextOnes.size === 0
+      ? collectedNextOnes.push(
+          nextOnesIncreasingGreenAndModifyingRed(brightness, List().push(seed))
+        )
+      : collectedNextOnes
+
+  const nextSeed = Map({
+    red: red(brightness, seed.get('green'),seed.get('blue') - 1),
     green: seed.get('green'),
+    // red: seed.get('red'),
+    // green: green(brightness, seed.get('red'), seed.get('blue') - 1),
     blue: seed.get('blue') - 1,
   })
 
@@ -125,7 +176,45 @@ const nextOnesNudgingBlueDown = (brightness, collectedNextOnes, seed) => {
     const nextOne = decreasingGreen.reverse().concat(increasingGreen)
 
     if (nextOne.size > 0) {
-      return nextOnesNudgingBlueDown(brightness, collectedNextOnes.push(nextOne), nextSeed)
+      return nextOnesNudgingBlueDownByAffectingRed(brightness, collectedNextOnes.push(nextOne), nextSeed)
+    } else {
+      return collectedNextOnes
+    }
+  } else {
+    return collectedNextOnes
+  }
+}
+
+const nextOnesNudgingBlueDownByAffectingGreen = (brightness, collectedNextOnes, seed) => {
+  const nextOnes =
+    collectedNextOnes.size === 0
+      ? collectedNextOnes.push(
+          nextOnesIncreasingGreenAndModifyingRed(brightness, List().push(seed))
+        )
+      : collectedNextOnes
+
+  const nextSeed = Map({
+    // red: red(brightness, seed.get('green'),seed.get('blue') - 1),
+    // green: seed.get('green'),
+    red: seed.get('red'),
+    green: green(brightness, seed.get('red'), seed.get('blue') - 1),
+    blue: seed.get('blue') - 1,
+  })
+
+  if (nextSeed.get('blue') >= 0 && !isNaN(nextSeed.get('red')) && nextSeed.get('red') >= 0) {
+    const decreasingGreen = nextOnesDecreasingGreenAndModifyingRed(
+      brightness,
+      List().push(nextSeed)
+    )
+    const increasingGreen = nextOnesIncreasingGreenAndModifyingRed(
+      brightness,
+      List().push(nextSeed)
+    )
+
+    const nextOne = decreasingGreen.reverse().concat(increasingGreen)
+
+    if (nextOne.size > 0) {
+      return nextOnesNudgingBlueDownByAffectingGreen(brightness, collectedNextOnes.push(nextOne), nextSeed)
     } else {
       return collectedNextOnes
     }
