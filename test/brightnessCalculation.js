@@ -33,9 +33,14 @@ module.exports = [
   },
   {
     description: 'equivalent brightness - nudging green up, affecting red - example 1',
-    test: () => Color.equivalentBrightnessNudgingGreenUpAffectingRed(
+    test: () => Color.equivalentBrightnessSet(
       128,
-      [[128, 125, 134]]
+      [[128, 125, 134]],
+      {
+        modify: 'green',
+        affect: 'red',
+        variation: 1,
+      }
     ),
     shouldEqual: [
       [ 128, 125, 134 ],

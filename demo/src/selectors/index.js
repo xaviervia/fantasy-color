@@ -40,21 +40,9 @@ export const getSpectrumOfEquivalents = createSelector(getBrightness, brightness
     seed
   )
 
-  // const nudgingBlueUpByAffectingGreen = nextOnesNudgingBlueUpByAffectingGreen(
-  //   brightness,
-  //   List(),
-  //   seed
-  // )
-  // const nudgingBlueDownByAffectingGreen = nextOnesNudgingBlueDownByAffectingGreen(
-  //   brightness,
-  //   List(),
-  //   seed
-  // )
-
   const spectrumOfEquivalents = nudgingBlueDownByAffectingRed
     .reverse()
     .concat(nudgingBlueUpByAffectingRed)
-    // .concat(nudgingBlueDownByAffectingGreen.reverse().concat(nudgingBlueUpByAffectingGreen))
     .reduce((a, b) => a.concat(b), List())
 
   global.spectrumOfEquivalents = spectrumOfEquivalents

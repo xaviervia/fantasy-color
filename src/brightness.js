@@ -51,28 +51,78 @@ function getBlueForEquivalentBrightnessColor (brightness, red, green) {
   )
 }
 
-function equivalentBrightnessNudgingGreenUpAffectingRed (
+function equivalentBrightnessSet (
   brightness,
-  equivalentBrightnessArray
+  equivalentBrightnessArray,
+  options
 ) {
   var lastEquivalentBrightnessColor = equivalentBrightnessArray[
     equivalentBrightnessArray.length - 1
   ]
 
-  var next = [
-    getRedForEquivalentBrightnessColor(
+  var red = options.affect === 'red'
+    ? getRedForEquivalentBrightnessColor(
       brightness,
-      lastEquivalentBrightnessColor[1] + 1,
-      lastEquivalentBrightnessColor[2]
-    ),
-    lastEquivalentBrightnessColor[1] + 1,
-    lastEquivalentBrightnessColor[2],
+      options.modify === 'green'
+        ? lastEquivalentBrightnessColor[1] + options.variation
+        : lastEquivalentBrightnessColor[1],
+      options.modify === 'blue'
+        ? lastEquivalentBrightnessColor[2] + options.variation
+        : lastEquivalentBrightnessColor[2],
+    )
+    : (
+      options.modify === 'red'
+        ? lastEquivalentBrightnessColor[0] + options.variation
+        : lastEquivalentBrightnessColor[0]
+    )
+
+  var green = options.affect === 'green'
+    ? getGreenForEquivalentBrightnessColor(
+      brightness,
+      options.modify === 'red'
+        ? lastEquivalentBrightnessColor[0] + options.variation
+        : lastEquivalentBrightnessColor[0],
+      options.modify === 'blue'
+        ? lastEquivalentBrightnessColor[2] + options.variation
+        : lastEquivalentBrightnessColor[2],
+    )
+    : (
+      options.modify === 'green'
+        ? lastEquivalentBrightnessColor[1] + options.variation
+        : lastEquivalentBrightnessColor[1]
+    )
+
+  var blue = options.affect === 'blue'
+    ? getBlueForEquivalentBrightnessColor(
+      brightness,
+      options.modify === 'red'
+        ? lastEquivalentBrightnessColor[0] + options.variation
+        : lastEquivalentBrightnessColor[0],
+      options.modify === 'green'
+        ? lastEquivalentBrightnessColor[1] + options.variation
+        : lastEquivalentBrightnessColor[1],
+    )
+    : (
+      options.modify === 'blue'
+        ? lastEquivalentBrightnessColor[2] + options.variation
+        : lastEquivalentBrightnessColor[2]
+    )
+
+  var next = [
+    red,
+    green,
+    blue,
   ]
 
-  if (next[1] < 256 && !isNaN(next[0]) && next[0] >= 0 && next[0] < 256) {
-    return equivalentBrightnessNudgingGreenUpAffectingRed(
+  if (
+    !isNaN(red) && red >= 0 && red < 256 &&
+    !isNaN(green) && green >= 0 && green < 256 &&
+    !isNaN(blue) && blue >= 0 && blue < 256
+  ) {
+    return equivalentBrightnessSet(
       brightness,
-      equivalentBrightnessArray.concat([next])
+      equivalentBrightnessArray.concat([next]),
+      options
     )
   } else {
     return equivalentBrightnessArray
@@ -83,7 +133,7 @@ module.exports.brightness = brightness
 module.exports.getRedForEquivalentBrightnessColor = getRedForEquivalentBrightnessColor
 module.exports.getGreenForEquivalentBrightnessColor = getGreenForEquivalentBrightnessColor
 module.exports.getBlueForEquivalentBrightnessColor = getBlueForEquivalentBrightnessColor
-module.exports.equivalentBrightnessNudgingGreenUpAffectingRed = equivalentBrightnessNudgingGreenUpAffectingRed
+module.exports.equivalentBrightnessSet = equivalentBrightnessSet
 module.exports.RED_BRIGHTNESS_WEIGHT = RED_BRIGHTNESS_WEIGHT
 module.exports.GREEN_BRIGHTNESS_WEIGHT = GREEN_BRIGHTNESS_WEIGHT
 module.exports.BLUE_BRIGHTNESS_WEIGHT = BLUE_BRIGHTNESS_WEIGHT
