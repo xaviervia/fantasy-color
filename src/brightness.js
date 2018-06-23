@@ -51,10 +51,39 @@ function getBlueForEquivalentBrightnessColor (brightness, red, green) {
   )
 }
 
+function equivalentBrightnessNudgingGreenUpAffectingRed (
+  brightness,
+  equivalentBrightnessArray
+) {
+  var lastEquivalentBrightnessColor = equivalentBrightnessArray[
+    equivalentBrightnessArray.length - 1
+  ]
+
+  var next = [
+    getRedForEquivalentBrightnessColor(
+      brightness,
+      lastEquivalentBrightnessColor[1] + 1,
+      lastEquivalentBrightnessColor[2]
+    ),
+    lastEquivalentBrightnessColor[1] + 1,
+    lastEquivalentBrightnessColor[2],
+  ]
+
+  if (next[1] < 256 && !isNaN(next[0]) && next[0] >= 0 && next[0] < 256) {
+    return equivalentBrightnessNudgingGreenUpAffectingRed(
+      brightness,
+      equivalentBrightnessArray.concat([next])
+    )
+  } else {
+    return equivalentBrightnessArray
+  }
+}
+
 module.exports.brightness = brightness
 module.exports.getRedForEquivalentBrightnessColor = getRedForEquivalentBrightnessColor
 module.exports.getGreenForEquivalentBrightnessColor = getGreenForEquivalentBrightnessColor
 module.exports.getBlueForEquivalentBrightnessColor = getBlueForEquivalentBrightnessColor
+module.exports.equivalentBrightnessNudgingGreenUpAffectingRed = equivalentBrightnessNudgingGreenUpAffectingRed
 module.exports.RED_BRIGHTNESS_WEIGHT = RED_BRIGHTNESS_WEIGHT
 module.exports.GREEN_BRIGHTNESS_WEIGHT = GREEN_BRIGHTNESS_WEIGHT
 module.exports.BLUE_BRIGHTNESS_WEIGHT = BLUE_BRIGHTNESS_WEIGHT

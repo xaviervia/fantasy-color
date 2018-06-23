@@ -3,27 +3,6 @@ import { createSelector } from 'reselect'
 
 import Color from '../../../'
 
-const red = (brightness, green, blue) =>
-  Math.round(
-    Math.sqrt(
-      (Math.pow(brightness, 2) - Math.pow(blue, 2) * 0.114 - Math.pow(green, 2) * 0.587) / 0.299
-    )
-  )
-
-const green = (brightness, red, blue) =>
-  Math.round(
-    Math.sqrt(
-      (Math.pow(brightness, 2) - Math.pow(red, 2) * 0.299 - Math.pow(blue, 2) * 0.114) / 0.587
-    )
-  )
-
-const blue = (brightness, red, green) =>
-  Math.round(
-    Math.sqrt(
-      (Math.pow(brightness, 2) - Math.pow(red, 2) * 0.299 - Math.pow(green, 2) * 0.587) / 0.114
-    )
-  )
-
 export const getColorObject = state => {
   const { red, green, blue, alpha } = Color(state.get('color'))
 
@@ -55,14 +34,28 @@ export const getSpectrumOfEquivalents = createSelector(getBrightness, brightness
   })
 
   const nudgingBlueUpByAffectingRed = nextOnesNudgingBlueUpByAffectingRed(brightness, List(), seed)
-  const nudgingBlueDownByAffectingRed = nextOnesNudgingBlueDownByAffectingRed(brightness, List(), seed)
+  const nudgingBlueDownByAffectingRed = nextOnesNudgingBlueDownByAffectingRed(
+    brightness,
+    List(),
+    seed
+  )
 
-  const nudgingBlueUpByAffectingGreen = nextOnesNudgingBlueUpByAffectingGreen(brightness, List(), seed)
-  const nudgingBlueDownByAffectingGreen = nextOnesNudgingBlueDownByAffectingGreen(brightness, List(), seed)
+  // const nudgingBlueUpByAffectingGreen = nextOnesNudgingBlueUpByAffectingGreen(
+  //   brightness,
+  //   List(),
+  //   seed
+  // )
+  // const nudgingBlueDownByAffectingGreen = nextOnesNudgingBlueDownByAffectingGreen(
+  //   brightness,
+  //   List(),
+  //   seed
+  // )
 
-  const spectrumOfEquivalents = nudgingBlueDownByAffectingRed.reverse().concat(nudgingBlueUpByAffectingRed)
-  .concat(nudgingBlueDownByAffectingGreen.reverse().concat(nudgingBlueUpByAffectingGreen))
-  .reduce((a, b) => a.concat(b), List())
+  const spectrumOfEquivalents = nudgingBlueDownByAffectingRed
+    .reverse()
+    .concat(nudgingBlueUpByAffectingRed)
+    // .concat(nudgingBlueDownByAffectingGreen.reverse().concat(nudgingBlueUpByAffectingGreen))
+    .reduce((a, b) => a.concat(b), List())
 
   global.spectrumOfEquivalents = spectrumOfEquivalents
 
@@ -79,10 +72,15 @@ const nextOnesNudgingBlueUpByAffectingRed = (brightness, collectedNextOnes, seed
       : collectedNextOnes
 
   const nextSeed = Map({
-    red: red(brightness, seed.get('green'), seed.get('blue') + 1),
+    red: Color.getRedForEquivalentBrightnessColor(
+      //
+      brightness,
+      seed.get('green'),
+      seed.get('blue') + 1
+    ),
     green: seed.get('green'),
     // red: seed.get('red'),
-    // green: green(brightness, seed.get('red'), seed.get('blue') + 1),
+    // green: Color.getGreenForEquivalentBrightnessColor((brightness, seed.get('red'), seed.get('blue') + 1),
     blue: seed.get('blue') + 1,
   })
 
@@ -99,7 +97,11 @@ const nextOnesNudgingBlueUpByAffectingRed = (brightness, collectedNextOnes, seed
     const nextOne = decreasingGreen.reverse().concat(increasingGreen)
 
     if (nextOne.size > 0) {
-      return nextOnesNudgingBlueUpByAffectingRed(brightness, collectedNextOnes.push(nextOne), nextSeed)
+      return nextOnesNudgingBlueUpByAffectingRed(
+        brightness,
+        collectedNextOnes.push(nextOne),
+        nextSeed
+      )
     } else {
       return collectedNextOnes
     }
@@ -118,10 +120,14 @@ const nextOnesNudgingBlueUpByAffectingGreen = (brightness, collectedNextOnes, se
       : collectedNextOnes
 
   const nextSeed = Map({
-    // red: red(brightness, seed.get('green'), seed.get('blue') + 1),
+    // red: Color.getRedForEquivalentBrightnessColor(brightness, seed.get('green'), seed.get('blue') + 1),
     // green: seed.get('green'),
     red: seed.get('red'),
-    green: green(brightness, seed.get('red'), seed.get('blue') + 1),
+    green: Color.getGreenForEquivalentBrightnessColor(
+      brightness,
+      seed.get('red'),
+      seed.get('blue') + 1
+    ),
     blue: seed.get('blue') + 1,
   })
 
@@ -138,7 +144,11 @@ const nextOnesNudgingBlueUpByAffectingGreen = (brightness, collectedNextOnes, se
     const nextOne = decreasingGreen.reverse().concat(increasingGreen)
 
     if (nextOne.size > 0) {
-      return nextOnesNudgingBlueUpByAffectingGreen(brightness, collectedNextOnes.push(nextOne), nextSeed)
+      return nextOnesNudgingBlueUpByAffectingGreen(
+        brightness,
+        collectedNextOnes.push(nextOne),
+        nextSeed
+      )
     } else {
       return collectedNextOnes
     }
@@ -156,10 +166,14 @@ const nextOnesNudgingBlueDownByAffectingRed = (brightness, collectedNextOnes, se
       : collectedNextOnes
 
   const nextSeed = Map({
-    red: red(brightness, seed.get('green'),seed.get('blue') - 1),
+    red: Color.getRedForEquivalentBrightnessColor(
+      brightness,
+      seed.get('green'),
+      seed.get('blue') - 1
+    ),
     green: seed.get('green'),
     // red: seed.get('red'),
-    // green: green(brightness, seed.get('red'), seed.get('blue') - 1),
+    // green: Color.getGreenForEquivalentBrightnessColor(brightness, seed.get('red'), seed.get('blue') - 1),
     blue: seed.get('blue') - 1,
   })
 
@@ -176,7 +190,11 @@ const nextOnesNudgingBlueDownByAffectingRed = (brightness, collectedNextOnes, se
     const nextOne = decreasingGreen.reverse().concat(increasingGreen)
 
     if (nextOne.size > 0) {
-      return nextOnesNudgingBlueDownByAffectingRed(brightness, collectedNextOnes.push(nextOne), nextSeed)
+      return nextOnesNudgingBlueDownByAffectingRed(
+        brightness,
+        collectedNextOnes.push(nextOne),
+        nextSeed
+      )
     } else {
       return collectedNextOnes
     }
@@ -194,10 +212,14 @@ const nextOnesNudgingBlueDownByAffectingGreen = (brightness, collectedNextOnes, 
       : collectedNextOnes
 
   const nextSeed = Map({
-    // red: red(brightness, seed.get('green'),seed.get('blue') - 1),
+    // red: Color.getRedForEquivalentBrightnessColor(brightness, seed.get('green'),seed.get('blue') - 1),
     // green: seed.get('green'),
     red: seed.get('red'),
-    green: green(brightness, seed.get('red'), seed.get('blue') - 1),
+    green: Color.getGreenForEquivalentBrightnessColor(
+      brightness,
+      seed.get('red'),
+      seed.get('blue') - 1
+    ),
     blue: seed.get('blue') - 1,
   })
 
@@ -214,7 +236,11 @@ const nextOnesNudgingBlueDownByAffectingGreen = (brightness, collectedNextOnes, 
     const nextOne = decreasingGreen.reverse().concat(increasingGreen)
 
     if (nextOne.size > 0) {
-      return nextOnesNudgingBlueDownByAffectingGreen(brightness, collectedNextOnes.push(nextOne), nextSeed)
+      return nextOnesNudgingBlueDownByAffectingGreen(
+        brightness,
+        collectedNextOnes.push(nextOne),
+        nextSeed
+      )
     } else {
       return collectedNextOnes
     }
@@ -225,7 +251,11 @@ const nextOnesNudgingBlueDownByAffectingGreen = (brightness, collectedNextOnes, 
 
 const nextOnesIncreasingGreenAndModifyingRed = (brightness, nextOnes) => {
   const nextOne = Map({
-    red: red(brightness, nextOnes.last().get('green') + 1, nextOnes.last().get('blue')),
+    red: Color.getRedForEquivalentBrightnessColor(
+      brightness,
+      nextOnes.last().get('green') + 1,
+      nextOnes.last().get('blue')
+    ),
     green: nextOnes.last().get('green') + 1,
     blue: nextOnes.last().get('blue'),
   })
@@ -239,7 +269,11 @@ const nextOnesIncreasingGreenAndModifyingRed = (brightness, nextOnes) => {
 
 const nextOnesDecreasingGreenAndModifyingRed = (brightness, nextOnes) => {
   const nextOne = Map({
-    red: red(brightness, nextOnes.last().get('green') - 1, nextOnes.last().get('blue')),
+    red: Color.getRedForEquivalentBrightnessColor(
+      brightness,
+      nextOnes.last().get('green') - 1,
+      nextOnes.last().get('blue')
+    ),
     green: nextOnes.last().get('green') - 1,
     blue: nextOnes.last().get('blue'),
   })

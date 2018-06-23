@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Map, List} from 'immutable'
+import { Map, List } from 'immutable'
 import { shouldUpdate } from 'recompose'
 import {
   AxesHelper,
@@ -49,7 +49,6 @@ class Spectrum extends Component {
     this.geometry = new BoxGeometry(1, 1, 1)
 
     this.onRef = this.onRef.bind(this)
-    this.handleMouseMove = this.handleMouseMove.bind(this)
   }
 
   onRef(domElement) {
@@ -69,8 +68,8 @@ class Spectrum extends Component {
     this.scene = new Scene()
 
     this.props.spectrum.forEach(color => {
-        this.scene.add(cube(this.geometry, color))
-      })
+      this.scene.add(cube(this.geometry, color))
+    })
 
     const axesHelper = new AxesHelper(500)
 
@@ -94,7 +93,7 @@ class Spectrum extends Component {
   }
 
   render() {
-    return <div ref={this.onRef} width={width} height={height} onMouseMove={this.handleMouseMove} />
+    return <div ref={this.onRef} width={width} height={height} />
   }
 }
 
