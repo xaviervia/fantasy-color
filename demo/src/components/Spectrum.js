@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {Map, List} from 'immutable'
 import { shouldUpdate } from 'recompose'
 import {
   AxesHelper,
@@ -16,6 +17,9 @@ import Color from '../../../'
 
 const height = 600
 const width = 600
+
+global.ImmutableMap = Map
+global.ImmutableList = List
 
 const cube = (geometry, color) => {
   const material = new MeshBasicMaterial({
@@ -64,26 +68,13 @@ class Spectrum extends Component {
 
     this.scene = new Scene()
 
-    this.props.spectrum.forEach(values => {
-      values.forEach(color => {
+    this.props.spectrum.forEach(color => {
         this.scene.add(cube(this.geometry, color))
       })
-    })
 
     const axesHelper = new AxesHelper(500)
 
     this.scene.add(axesHelper)
-
-    const material = new MeshBasicMaterial({
-      color: 0xffffff,
-      opacity: 0.1,
-    })
-
-    const boundaries = new Mesh(new BoxGeometry(256, 256, 256), material)
-    boundaries.position.x = 128
-    boundaries.position.y = 128
-    boundaries.position.z = 128
-    this.scene.add(boundaries)
 
     this.renderer.render(this.scene, this.camera)
   }
@@ -91,41 +82,13 @@ class Spectrum extends Component {
   componentDidUpdate() {
     this.scene = new Scene()
 
-    this.props.spectrum.forEach(values => {
-      values.forEach(color => {
-        this.scene.add(cube(this.geometry, color))
-      })
+    this.props.spectrum.forEach(color => {
+      this.scene.add(cube(this.geometry, color))
     })
 
     const axesHelper = new AxesHelper(500)
 
     this.scene.add(axesHelper)
-
-    const material = new MeshBasicMaterial({
-      color: 0xffffff,
-      opacity: 0.5,
-    })
-
-    const boundaries = new Mesh(new BoxGeometry(256, 256, 256), material)
-    boundaries.position.x = 128
-    boundaries.position.y = 128
-    boundaries.position.z = 128
-    this.scene.add(boundaries)
-
-    this.renderer.render(this.scene, this.camera)
-  }
-
-  handleMouseMove(e) {
-    const relativeLeft = ((e.clientX - this.boundingClientRect.left - width / 2) / width) * 2
-    const relativeTop = ((e.clientY - this.boundingClientRect.top - height / 2) / height) * 2
-    console.log('relativeLeft', relativeLeft + 1)
-    console.log('relativeTop', relativeTop + 1)
-
-    this.camera.position.x = Math.sin(Math.PI / 2 * (relativeLeft + 1 / 2)) * 400
-    this.camera.position.y = 400 + (Math.cos(Math.PI / 2  * (relativeLeft + 1 / 2)) * 400)
-    this.camera.position.z = Math.sin(Math.PI / 2) * 256
-    this.camera.lookAt(128, 128, 128)
-    this.camera.rotation.z = Math.sin(Math.PI)
 
     this.renderer.render(this.scene, this.camera)
   }
