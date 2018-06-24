@@ -94,9 +94,10 @@ const nextOnesNudgingBlueDownByAffectingRed = (brightness, collectedNextOnes, se
   const red = Color.getRedForEquivalentBrightnessColor(brightness, seed[1], seed[2] - 1)
   const green = seed[1]
   const blue = seed[2] - 1
+
   const nextSeed = [red, green, blue]
 
-  if (blue >= 0 && !red && red >= 0) {
+  if (blue >= 0 && !isNaN(red) && red >= 0) {
     const decreasingGreen = Color.equivalentBrightnessSet(brightness, [nextSeed], {
       modify: 'green',
       affect: 'red',
