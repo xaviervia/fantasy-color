@@ -1,18 +1,14 @@
 import React, { Component } from 'react'
 import { Map, List } from 'immutable'
-import { shouldUpdate } from 'recompose'
 import {
   AxesHelper,
   Scene,
-  PerspectiveCamera,
   OrthographicCamera,
   WebGLRenderer,
   BoxGeometry,
-  Vector3,
   MeshBasicMaterial,
   Mesh,
 } from 'three'
-import Layout from '@primitives/layout'
 import Color from '../../../'
 
 const height = 600
@@ -23,12 +19,12 @@ global.ImmutableList = List
 
 const cube = (geometry, color) => {
   const material = new MeshBasicMaterial({
-    color: Color.toRGB(color.get('red'), color.get('green'), color.get('blue')),
+    color: Color.toRGB(color[0], color[1], color[2]),
   })
   const cube = new Mesh(geometry, material)
-  cube.position.x = color.get('red') / 2
-  cube.position.y = color.get('green') / 2
-  cube.position.z = color.get('blue') / 2
+  cube.position.x = color[0]
+  cube.position.y = color[1]
+  cube.position.z = color[2]
   return cube
 }
 
@@ -36,12 +32,12 @@ class Spectrum extends Component {
   constructor() {
     super()
 
-    this.camera = new OrthographicCamera(-400, 400, -400, 400, 1, 5000)
+    this.camera = new OrthographicCamera(-256, 256, -256, 256, 1, 5000)
 
-    this.camera.position.x = Math.sin(Math.PI / 2) * 400
-    this.camera.position.y = 400 // Math.sin(Math.PI / 2) * 400
-    this.camera.position.z = Math.sin(Math.PI / 2) * 256
-    this.camera.lookAt(128, 128, 128)
+    this.camera.position.x = 256
+    this.camera.position.y = 256
+    this.camera.position.z = 256
+    this.camera.lookAt(0, 0, 0)
     this.camera.rotation.z = Math.sin(Math.PI)
 
     this.renderer = new WebGLRenderer()

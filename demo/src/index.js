@@ -6,9 +6,12 @@ import withStore from 'hoc-with-store'
 import { reducer } from './store'
 import hashHeat from './heats/hash'
 import getHashDispatcher from './dispatchers/hash'
-import Color from '../../'
 import App from './App'
 import * as selectors from './selectors'
+
+import R from 'ramda'
+
+global.R = R
 
 const store = createStore(
   reducer,
