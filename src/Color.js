@@ -6,10 +6,11 @@ var split = require('ramda/src/split')
 var trim = require('ramda/src/trim')
 
 function Color(input) {
+  var colors
   if (typeof input === 'string') {
     if (input[0] === '#') {
       if (input.length === 7) {
-        const colors = [
+        colors = [
           input.slice(1, 3),
           input.slice(3, 5),
           input.slice(5, 7)
@@ -34,7 +35,7 @@ function Color(input) {
         return undefined
       }
 
-      const colors = compose(
+      colors = compose(
         reduce(
           function (acc, color) {
             if (acc === undefined) {
@@ -69,7 +70,7 @@ function Color(input) {
         return undefined
       }
 
-      const colors = compose(
+      colors = compose(
         reduce(
           function (acc, color) {
             if (acc === undefined) {
