@@ -2,15 +2,23 @@
   "name": "fantasy-color",
   "version": "0.2.2",
   "description": "Fantasy Land type for CSS color",
-  "main": "index.js",
-  "repository": "git@github.com:xaviervia/fantasy-color",
+  "main": "dist/Color.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xaviervia/fantasy-color.git"
+  },
   "author": "Fernando Via Canel <fernando.via@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "@babel/cli": "^7.0.0-beta.55",
+    "@babel/core": "^7.0.0-beta.55",
+    "@babel/node": "^7.0.0-beta.55",
+    "@babel/preset-env": "^7.0.0-beta.55",
     "washington": "^2.0.0-rc.3"
   },
   "scripts": {
-    "test": "washington test"
+    "build": "babel src/ -d dist/",
+    "test": "babel-node test"
   },
   "dependencies": {
     "ramda": "^0.25.0"

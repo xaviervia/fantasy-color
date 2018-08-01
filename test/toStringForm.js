@@ -1,6 +1,6 @@
-const Color = require('../')
+import Color from '../src/Color'
 
-module.exports = [
+export default [
   {
     description: 'toString',
     test: () => Color.of(250, 167, 23, 0.8).toString(),
