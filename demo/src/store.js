@@ -1,5 +1,5 @@
 import { Map } from 'immutable'
-import Color from '../../'
+import Color from '../../src/Color'
 
 export const initialState = Map()
   .set('initialized', false)
