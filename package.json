@@ -3,6 +3,9 @@
   "version": "0.2.2",
   "description": "Fantasy Land type for CSS color",
   "main": "dist/Color.js",
+  "files": [
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/xaviervia/fantasy-color.git"
