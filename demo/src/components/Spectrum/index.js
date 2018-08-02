@@ -9,7 +9,7 @@ import {
   Mesh,
 } from 'three'
 import boundaries from './boundaries'
-import Color from '../../../../'
+import Color from '../../../../src/Color'
 
 const cube = (geometry, color) => {
   const material = new MeshBasicMaterial({

@@ -1,7 +1,7 @@
 import { Map } from 'immutable'
 import { createSelector } from 'reselect'
 
-import Color from '../../../'
+import Color from '../../../src/Color'
 
 export const getColorObject = state => {
   const { red, green, blue, alpha } = Color(state.get('color'))

@@ -1,19 +1,18 @@
 // Magical weights for calculating perceived relative brightness
 // Taken from http://alienryderflex.com/hsp.html
-var RED_BRIGHTNESS_WEIGHT = 0.299
-var GREEN_BRIGHTNESS_WEIGHT = 0.587
-var BLUE_BRIGHTNESS_WEIGHT = 0.114
+export const RED_BRIGHTNESS_WEIGHT = 0.299
+export const GREEN_BRIGHTNESS_WEIGHT = 0.587
+export const BLUE_BRIGHTNESS_WEIGHT = 0.114
 
-function brightness (red, green, blue, alpha) {
-  return Math.sqrt(
+export const brightness = (red, green, blue, alpha) =>
+  Math.sqrt(
     Math.pow(red, 2) * RED_BRIGHTNESS_WEIGHT +
     Math.pow(green, 2) * GREEN_BRIGHTNESS_WEIGHT +
     Math.pow(blue, 2) * BLUE_BRIGHTNESS_WEIGHT
   ) * alpha
-}
 
-function getRedForEquivalentBrightnessColor (brightness, green, blue) {
-  return Math.round(
+export const getRedForEquivalentBrightnessColor = (brightness, green, blue) =>
+  Math.round(
     Math.sqrt(
       (
         Math.pow(brightness, 2) -
@@ -23,10 +22,9 @@ function getRedForEquivalentBrightnessColor (brightness, green, blue) {
       RED_BRIGHTNESS_WEIGHT
     )
   )
-}
 
-function getGreenForEquivalentBrightnessColor (brightness, red, blue) {
-  return Math.round(
+export const getGreenForEquivalentBrightnessColor = (brightness, red, blue) =>
+  Math.round(
     Math.sqrt(
       (
         Math.pow(brightness, 2) -
@@ -36,10 +34,9 @@ function getGreenForEquivalentBrightnessColor (brightness, red, blue) {
       GREEN_BRIGHTNESS_WEIGHT
     )
   )
-}
 
-function getBlueForEquivalentBrightnessColor (brightness, red, green) {
-  return Math.round(
+export const getBlueForEquivalentBrightnessColor = (brightness, red, green) =>
+  Math.round(
     Math.sqrt(
       (
         Math.pow(brightness, 2) -
@@ -49,18 +46,17 @@ function getBlueForEquivalentBrightnessColor (brightness, red, green) {
       BLUE_BRIGHTNESS_WEIGHT
     )
   )
-}
 
-function equivalentBrightnessSet (
+export const equivalentBrightnessSet = (
   brightness,
   equivalentBrightnessArray,
   options
-) {
-  var lastEquivalentBrightnessColor = equivalentBrightnessArray[
+) => {
+  const lastEquivalentBrightnessColor = equivalentBrightnessArray[
     equivalentBrightnessArray.length - 1
   ]
 
-  var red = options.affect === 'red'
+  const red = options.affect === 'red'
     ? getRedForEquivalentBrightnessColor(
       brightness,
       options.modify === 'green'
@@ -76,7 +72,7 @@ function equivalentBrightnessSet (
         : lastEquivalentBrightnessColor[0]
     )
 
-  var green = options.affect === 'green'
+  const green = options.affect === 'green'
     ? getGreenForEquivalentBrightnessColor(
       brightness,
       options.modify === 'red'
@@ -92,7 +88,7 @@ function equivalentBrightnessSet (
         : lastEquivalentBrightnessColor[1]
     )
 
-  var blue = options.affect === 'blue'
+  const blue = options.affect === 'blue'
     ? getBlueForEquivalentBrightnessColor(
       brightness,
       options.modify === 'red'
@@ -108,11 +104,7 @@ function equivalentBrightnessSet (
         : lastEquivalentBrightnessColor[2]
     )
 
-  var next = [
-    red,
-    green,
-    blue,
-  ]
+  const next = [ red, green, blue ]
 
   if (
     !isNaN(red) && red >= 0 && red < 256 &&
@@ -121,19 +113,10 @@ function equivalentBrightnessSet (
   ) {
     return equivalentBrightnessSet(
       brightness,
-      equivalentBrightnessArray.concat([next]),
+      [...equivalentBrightnessArray, next],
       options
     )
   } else {
     return equivalentBrightnessArray
   }
 }
-
-module.exports.brightness = brightness
-module.exports.getRedForEquivalentBrightnessColor = getRedForEquivalentBrightnessColor
-module.exports.getGreenForEquivalentBrightnessColor = getGreenForEquivalentBrightnessColor
-module.exports.getBlueForEquivalentBrightnessColor = getBlueForEquivalentBrightnessColor
-module.exports.equivalentBrightnessSet = equivalentBrightnessSet
-module.exports.RED_BRIGHTNESS_WEIGHT = RED_BRIGHTNESS_WEIGHT
-module.exports.GREEN_BRIGHTNESS_WEIGHT = GREEN_BRIGHTNESS_WEIGHT
-module.exports.BLUE_BRIGHTNESS_WEIGHT = BLUE_BRIGHTNESS_WEIGHT

@@ -1,6 +1,6 @@
-const Color = require('../')
+import Color from '../src/Color'
 
-module.exports = [
+export default [
   {
     description: 'builds from array - test red',
     test: () => Color([254, 213, 92, 0.3]).red,
