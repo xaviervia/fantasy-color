@@ -18,7 +18,8 @@
   },
   "scripts": {
     "build": "babel src/ -d dist/",
-    "test": "babel-node test"
+    "test": "babel-node test",
+    "prepublishOnly": "yarn build"
   },
   "dependencies": {
     "ramda": "^0.25.0"
