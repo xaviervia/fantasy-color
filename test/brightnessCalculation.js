@@ -1,39 +1,52 @@
+import { example, suite } from 'washington'
 import Color from '../src/Color'
 
-export default [
-  {
-    description: 'brightness - example 1',
-    test: () => Color('#FF0000').brightness(),
-    shouldEqual: 139.43627576782163,
-  },
-  {
-    description: 'brightness - example 2',
-    test: () => Color('#00FF00').brightness(),
-    shouldEqual: 195.37060935565512,
-  },
-  {
-    description: 'brightness - example 3',
-    test: () => Color('#0000FF').brightness(),
-    shouldEqual: 86.09790938228407,
-  },
-  {
-    description: 'equivalent brightness - get red - example 1',
-    test: () => Color.getRedForEquivalentBrightnessColor(128, 125, 134),
-    shouldEqual: 131,
-  },
-  {
-    description: 'equivalent brightness - get green - example 1',
-    test: () => Color.getGreenForEquivalentBrightnessColor(128, 125, 134),
-    shouldEqual: 128,
-  },
-  {
-    description: 'equivalent brightness - get blue - example 1',
-    test: () => Color.getBlueForEquivalentBrightnessColor(128, 125, 134),
-    shouldEqual: 101,
-  },
-  {
-    description: 'equivalent brightness - nudging green up, affecting red - example 1',
-    test: () => Color.equivalentBrightnessSet(
+const brightnessSuite = suite(
+  'brightness',
+
+  example(
+    'example 1',
+    () => Color('#FF0000').brightness(),
+    139.43627576782163,
+  ),
+
+  example(
+    'example 2',
+    () => Color('#00FF00').brightness(),
+    195.37060935565512,
+  ),
+
+  example(
+    'example 3',
+    () => Color('#0000FF').brightness(),
+    86.09790938228407,
+  )
+)
+
+const equivalentBrightnessSuite = suite(
+  'equivalent brightness',
+
+  example(
+    'get red - example 1',
+    () => Color.getRedForEquivalentBrightnessColor(128, 125, 134),
+    131,
+  ),
+
+  example(
+    'get green - example 1',
+    () => Color.getGreenForEquivalentBrightnessColor(128, 125, 134),
+    128,
+  ),
+
+  example(
+    'get blue - example 1',
+    () => Color.getBlueForEquivalentBrightnessColor(128, 125, 134),
+    101,
+  ),
+
+  example(
+    'nudging green up, affecting red - example 1',
+    () => Color.equivalentBrightnessSet(
       128,
       [[128, 125, 134]],
       {
@@ -42,7 +55,7 @@ export default [
         variation: 1,
       }
     ),
-    shouldEqual: [
+    [
       [ 128, 125, 134 ],
       [ 130, 126, 134 ],
       [ 128, 127, 134 ],
@@ -76,5 +89,7 @@ export default [
       [ 28, 155, 134 ],
       [ 13, 156, 134 ]
     ],
-  },
-]
+  ),
+)
+
+export default brightnessSuite.concat(equivalentBrightnessSuite)

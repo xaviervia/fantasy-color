@@ -17,7 +17,7 @@
     "@babel/core": "^7.0.0-beta.55",
     "@babel/node": "^7.0.0-beta.55",
     "@babel/preset-env": "^7.0.0-beta.55",
-    "washington": "^2.0.0-rc.3"
+    "washington": "^2.0.0-rc.5"
   },
   "scripts": {
     "build": "babel src/ -d dist/",

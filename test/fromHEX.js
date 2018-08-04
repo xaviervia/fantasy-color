@@ -1,34 +1,36 @@
+import { example, suite } from 'washington'
 import Color from '../src/Color'
 
-export default [
-  {
-    description: 'builds from hex - test red',
-    test: () => Color('#452312').red,
-    shouldEqual: 69,
-  },
-  {
-    description: 'builds from hex - test green',
-    test: () => Color('#452312').green,
-    shouldEqual: 35,
-  },
-  {
-    description: 'builds from hex - test blue',
-    test: () => Color('#452312').blue,
-    shouldEqual: 18,
-  },
-  {
-    description: 'builds from hex - test alpha',
-    test: () => Color('#452312').alpha,
-    shouldEqual: 1,
-  },
-  {
-    description: 'builds from hex - incomplete is undefined',
-    test: () => Color('#45'),
-    shouldEqual: undefined,
-  },
-  {
-    description: 'builds from hex - incomplete is undefined - other example',
-    test: () => Color('#0099E'),
-    shouldEqual: undefined,
-  },
-]
+export default suite(
+  'fromHEX',
+  example(
+    'test red',
+    () => Color('#452312').red,
+    69,
+  ),
+  example(
+    'test green',
+    () => Color('#452312').green,
+    35,
+  ),
+  example(
+    'test blue',
+    () => Color('#452312').blue,
+    18,
+  ),
+  example(
+    'test alpha',
+    () => Color('#452312').alpha,
+    1,
+  ),
+  example(
+    'incomplete is undefined',
+    () => Color('#45'),
+    undefined,
+  ),
+  example(
+    'incomplete is undefined - other example',
+    () => Color('#0099E'),
+    undefined,
+  ),
+)

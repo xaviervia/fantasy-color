@@ -1,25 +1,25 @@
+import { example, suite } from 'washington'
 import Color from '../src/Color'
 
 export default [
-  {
-    description: 'toString',
-    test: () => Color.of(250, 167, 23, 0.8).toString(),
-    shouldEqual: 'rgba(250, 167, 23, 0.8)',
-  },
-  {
-    description: 'inspect',
-    test: () => Color.of(250, 167, 23, 0.8).inspect(),
-    shouldEqual: 'rgba(250, 167, 23, 0.8)',
-  },
-  {
-    description: 'toHEX returns only the HEX part',
-    test: () => Color.of(250, 167, 23, 0.8).toHEX(),
-    shouldEqual: '#FAA717',
-  },
-  {
-    description: 'toHEX is super buggy',
-  },
-  {
-    description: 'toRGB',
-  },
+  example(
+    'toString',
+    () => Color.of(250, 167, 23, 0.8).toString(),
+    'rgba(250, 167, 23, 0.8)',
+  ),
+
+  example(
+    'inspect',
+    () => Color.of(250, 167, 23, 0.8).inspect(),
+    'rgba(250, 167, 23, 0.8)',
+  ),
+
+  example(
+    'toHEX returns only the HEX part',
+    () => Color.of(250, 167, 23, 0.8).toHEX(),
+    '#FAA717',
+  ),
+
+  example('toHEX is super buggy'),
+  example('toRGB'),
 ]
