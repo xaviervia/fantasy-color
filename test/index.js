@@ -5,6 +5,7 @@ import fromHEX from './fromHEX'
 import fromOf from './fromOf'
 import fromRGB from './fromRGB'
 import fromRGBA from './fromRGBA'
+import invert from './invert'
 import toStringForm from './toStringForm'
 
 washington(
@@ -15,6 +16,7 @@ washington(
     ...fromOf,
     ...fromRGB,
     ...fromRGBA,
+    ...invert,
     ...toStringForm,
   ]
 )
