@@ -42,3 +42,4 @@ import Color from 'fantasy-color'
 console.log(Color('rgba(107, 66, 98, 0.7)').brightness())
 // > 58.87944216787384
 ```
+
