@@ -1,6 +1,6 @@
 {
   "name": "fantasy-color",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Fantasy Land type for CSS color",
   "main": "dist/Color.js",
   "files": [
