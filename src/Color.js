@@ -28,6 +28,10 @@ const of = (red = 0, green = 0, blue = 0, alpha = 1) => ({
   inspect: () => toRGBA(red, green, blue, alpha),
   toRGBA: () => toRGBA(red, green, blue, alpha),
   toString: () => toRGBA(red, green, blue, alpha),
+  invert: () => {
+    const invertColor = (color) => 255 - color
+    return Color.of(invertColor(red), invertColor(green), invertColor(blue), alpha)
+  }
 })
 
 Color.brightness = brightness

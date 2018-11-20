@@ -43,3 +43,13 @@ console.log(Color('rgba(107, 66, 98, 0.7)').brightness())
 // > 58.87944216787384
 ```
 
+### Invert color
+
+Inverting will calculate the inverse color without affecting any alpha values. The color will cause white to become black, blue to become orange and accordingly:
+
+```js
+import Color from 'fantasy-color'
+
+console.log(Color('rgba(233, 66, 55, 0.3)').invert().toString())
+// > 'rgba(22, 189, 200, 0.3)'
+```
