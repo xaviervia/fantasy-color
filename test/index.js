@@ -6,6 +6,7 @@ import fromOf from './fromOf'
 import fromRGB from './fromRGB'
 import fromRGBA from './fromRGBA'
 import invert from './invert'
+import toHSVA from './toHSVA'
 import toStringForm from './toStringForm'
 
 washington(
@@ -17,6 +18,7 @@ washington(
     ...fromRGB,
     ...fromRGBA,
     ...invert,
+    ...toHSVA,
     ...toStringForm,
   ]
 )
