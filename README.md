@@ -25,6 +25,9 @@ console.log(Color('rgb(23, 234, 67)').toString())
 console.log(Color('rgba(23, 234, 67, .6)').toString())
 // > 'rgba(23, 234, 67, 0.6)'
 
+console.log(Color('hsva(38, 91, 98, 0.8)').toString())
+// > 'rgba(250, 167, 22, 0.8)'
+
 console.log(Color.of(250, 167, 23, 0.8))
 // > 'rgba(250, 167, 23, 0.8)'
 

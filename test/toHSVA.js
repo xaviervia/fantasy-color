@@ -44,6 +44,16 @@ export default suite(
     'hsva(205, 100, 100, 1)',
   ),
   example(
+    'test some greener turquoise',
+    () => Color.of(0, 176, 255, 1).toHSVA(),
+    'hsva(199, 100, 100, 1)',
+  ),
+  example(
+    'test some green',
+    () => Color.of(0, 255, 105, 1).toHSVA(),
+    'hsva(145, 100, 100, 1)',
+  ),
+  example(
     'test some other turquoise',
     () => Color.of(0, 124, 255, 1).toHSVA(),
     'hsva(211, 100, 100, 1)',
@@ -52,5 +62,10 @@ export default suite(
     'test some unsaturated shade',
     () => Color.of(47, 70, 95, 1).toHSVA(),
     'hsva(211, 51, 37, 1)',
+  ),
+  example(
+    'test some purple unsaturated shade',
+    () => Color.of(181, 77, 180, 1).toHSVA(),
+    'hsva(301, 57, 71, 1)',
   ),
 )
