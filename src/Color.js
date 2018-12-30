@@ -7,7 +7,12 @@ import {
 } from './brightness'
 
 import fromString from './fromString'
-import { toHEX, toRGB, toRGBA } from './toString'
+import { 
+  toHEX, 
+  toRGB, 
+  toRGBA,
+  toHSVA
+} from './toString'
 
 const Color = (input) => {
   const x = typeof input === 'string'
@@ -27,6 +32,7 @@ const of = (red = 0, green = 0, blue = 0, alpha = 1) => ({
   toHEX: () => toHEX(red, green, blue),
   inspect: () => toRGBA(red, green, blue, alpha),
   toRGBA: () => toRGBA(red, green, blue, alpha),
+  toHSVA: () => toHSVA(red, green, blue, alpha),
   toString: () => toRGBA(red, green, blue, alpha),
   invert: () => {
     const invertColor = (color) => 255 - color
@@ -43,6 +49,7 @@ Color.equivalentBrightnessSet = equivalentBrightnessSet
 Color.toHEX = toHEX
 Color.toRGB = toRGB
 Color.toRGBA = toRGBA
+Color.toHSVA = toHSVA
 
 Color.of = of
 
