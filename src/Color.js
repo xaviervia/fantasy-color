@@ -31,6 +31,7 @@ const of = (red = 0, green = 0, blue = 0, alpha = 1) => ({
   brightness: () => brightness(red, green, blue, alpha),
   toHEX: () => toHEX(red, green, blue),
   inspect: () => toRGBA(red, green, blue, alpha),
+  toArray: () => [red, green, blue, alpha],
   toRGBA: () => toRGBA(red, green, blue, alpha),
   toHSVA: () => toHSVA(red, green, blue, alpha),
   toString: () => toRGBA(red, green, blue, alpha),
