@@ -1940,34 +1940,38 @@ v8flags@^3.1.1:
   dependencies:
     homedir-polyfill "^1.0.1"
 
-washington.core@^2.0.0-rc.4:
-  version "2.0.0-rc.4"
-  resolved "https://registry.yarnpkg.com/washington.core/-/washington.core-2.0.0-rc.4.tgz#1c845f68827a91d92d386119ce20ff405b6a11d7"
+washington.core@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/washington.core/-/washington.core-2.0.0.tgz#68bb219c8870a2f753627aece1aac66a2451465f"
+  integrity sha512-8/D33dkYBsp3dGmjdCiH4R+111X7jX2RbyCuSG57P9YuVgKFDts7sATzx3ZUQwGJlggfIOWtPClKwpzJrDbrpQ==
   dependencies:
     folktale "^v2.0.0-rc1"
     immutable "^3.8.1"
     immutable-ext "^1.0.8"
     partial.lenses "^9.4.1"
 
-washington.dsl@^2.0.0-rc.5:
-  version "2.0.0-rc.5"
-  resolved "https://registry.yarnpkg.com/washington.dsl/-/washington.dsl-2.0.0-rc.5.tgz#7d2b7c381445a8539d68b60df6b70b043eff295a"
+washington.dsl@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/washington.dsl/-/washington.dsl-2.0.0.tgz#01ae7aa87d13366270c1cd1ef432439e980d3d3a"
+  integrity sha512-Y+0uuqAlknVc+1SvLKnwTaEJSTUUe4kxqZ3C4QIqC70kM5UCmU0xz4wL48ygk5nKgvZ0gd3tzkpPhgv+b0TeuA==
 
-washington.formatter.terminal@^2.0.0-rc.4:
-  version "2.0.0-rc.4"
-  resolved "https://registry.yarnpkg.com/washington.formatter.terminal/-/washington.formatter.terminal-2.0.0-rc.4.tgz#d3b8b80a3e8a68a7c15c198abba9d883f8880fc9"
+washington.formatter.terminal@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/washington.formatter.terminal/-/washington.formatter.terminal-2.0.0.tgz#d05711d888cf43c0f31e8d09ee899f0c5672c076"
+  integrity sha512-MtZZnNlwDW7liKyBf74sJQTKQzjyezHlouIy+c98qTfiZ4rn1cAmVx8+Lt4fyLPnDDavyjskCCzJxfSiEmeECg==
   dependencies:
     chalk "^1.1.3"
     folktale "^v2.0.0-rc1"
     partial.lenses "^9.4.1"
 
-washington@^2.0.0-rc.5:
-  version "2.0.0-rc.5"
-  resolved "https://registry.yarnpkg.com/washington/-/washington-2.0.0-rc.5.tgz#a4baf5cf32afc25b2d0e160733a18ef4d31e866d"
+washington@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/washington/-/washington-2.0.0.tgz#afa9cbd7da270027787beb219d5972285256c833"
+  integrity sha512-d7zCIXzmdWqWurQNGBbgUIwOO/x1wd4dMmGNWY/nxxeBN3R07A+uJ3RFOudZu2IuHw0Ao4Sp++fn5B2SXJ4zZA==
   dependencies:
-    washington.core "^2.0.0-rc.4"
-    washington.dsl "^2.0.0-rc.5"
-    washington.formatter.terminal "^2.0.0-rc.4"
+    washington.core "^2.0.0"
+    washington.dsl "^2.0.0"
+    washington.formatter.terminal "^2.0.0"
 
 wide-align@^1.1.0:
   version "1.1.3"

@@ -2,6 +2,7 @@ import washington from 'washington'
 import brightnessCalculation from './brightnessCalculation'
 import fromArray from './fromArray'
 import fromHEX from './fromHEX'
+import fromHSVA from './fromHSVA'
 import fromOf from './fromOf'
 import fromRGB from './fromRGB'
 import fromRGBA from './fromRGBA'
@@ -15,6 +16,7 @@ washington(
     ...brightnessCalculation,
     ...fromArray,
     ...fromHEX,
+    ...fromHSVA,
     ...fromOf,
     ...fromRGB,
     ...fromRGBA,
@@ -22,5 +24,5 @@ washington(
     ...toArray,
     ...toHSVA,
     ...toStringForm,
-  ]
+  ].filter(({description}) => /HSVA/.test(description))
 )
