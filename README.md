@@ -30,6 +30,9 @@ console.log(Color.of(250, 167, 23, 0.8))
 
 console.log(Color.of(250, 167, 23, 0.8).toHEX())
 // > '#FAA717'
+
+console.log(Color.of(250, 167, 23, 0.8).toHSVA())
+// > 'hsva(38, 91, 98, 0.8)'
 ```
 
 ### Brightness
