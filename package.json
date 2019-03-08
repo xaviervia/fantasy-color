@@ -1,28 +1,154 @@
 {
-  "name": "fantasy-color",
-  "version": "0.2.7",
+  "private": true,
   "description": "Fantasy Land type for CSS color",
-  "main": "dist/Color.js",
-  "files": [
-    "dist"
+  "workspaces": [
+    "packages/*"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/xaviervia/fantasy-color.git"
-  },
-  "author": "Fernando Via Canel <fernando.via@gmail.com>",
-  "license": "MIT",
   "devDependencies": {
-    "@babel/cli": "^7.0.0-beta.55",
-    "@babel/core": "^7.0.0-beta.55",
-    "@babel/node": "^7.0.0-beta.55",
-    "@babel/preset-env": "^7.0.0-beta.55",
-    "washington": "^2.0.0"
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/plugin-syntax-typescript": "^7.3.3",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/preset-typescript": "^7.3.3",
+    "@babel/register": "^7.0.0",
+    "@deepsweet/eslint-config-node-ts": "^0.2.1",
+    "@start/cli": "^0.4.0",
+    "@start/plugin": "^0.3.0",
+    "@start/plugin-assert": "^0.3.0",
+    "@start/plugin-env": "^0.5.0",
+    "@start/plugin-find": "^0.3.0",
+    "@start/plugin-find-git-staged": "^0.3.0",
+    "@start/plugin-lib-auto": "^0.6.0",
+    "@start/plugin-lib-babel": "^0.3.0",
+    "@start/plugin-lib-codecov": "^0.3.0",
+    "@start/plugin-lib-eslint": "^0.4.0",
+    "@start/plugin-lib-istanbul": "^0.5.0",
+    "@start/plugin-lib-tape": "^0.3.0",
+    "@start/plugin-lib-typescript-check": "^0.3.0",
+    "@start/plugin-lib-typescript-generate": "^0.4.0",
+    "@start/plugin-overwrite": "^0.3.0",
+    "@start/plugin-parallel": "^0.3.0",
+    "@start/plugin-read": "^0.3.0",
+    "@start/plugin-remove": "^0.3.0",
+    "@start/plugin-rename": "^0.3.0",
+    "@start/plugin-sequence": "^0.3.1",
+    "@start/plugin-watch": "^0.3.0",
+    "@start/plugin-write": "^0.3.0",
+    "@start/plugin-xargs": "^0.3.0",
+    "@start/reporter-verbose": "^0.2.0",
+    "@types/blue-tape": "^0.1.32",
+    "@types/node": "^11.10.5",
+    "@types/prompts": "^1.2.0",
+    "@typescript-eslint/parser": "^1.4.2",
+    "babel-plugin-module-resolver": "^3.2.0",
+    "blue-tape": "^1.0.0",
+    "eslint": "^5.15.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-promise": "^4.0.0",
+    "eslint-plugin-standard": "^4.0.0",
+    "mocku": "^0.4.0",
+    "spyfn": "^0.1.1",
+    "tap-diff": "^0.1.1",
+    "typeon": "^0.2.0",
+    "typescript": "^3.3.3333"
   },
-  "scripts": {
-    "build": "babel src/ -d dist/",
-    "test": "babel-node test",
-    "prepublishOnly": "yarn build"
+  "start": {
+    "require": [
+      [
+        "@babel/register",
+        {
+          "presets": [
+            [
+              "@babel/preset-env",
+              {
+                "targets": {
+                  "node": "current"
+                },
+                "modules": false
+              }
+            ],
+            "@babel/preset-typescript"
+          ],
+          "plugins": [
+            "@babel/plugin-syntax-dynamic-import"
+          ],
+          "extensions": [
+            ".ts",
+            ".js"
+          ]
+        }
+      ]
+    ],
+    "reporter": "@start/reporter-verbose"
   },
-  "dependencies": {}
+  "eslintConfig": {
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "standard",
+      "node",
+      "promise",
+      "import"
+    ],
+    "extends": [
+      "standard",
+      "plugin:node/recommended",
+      "plugin:promise/recommended",
+      "plugin:import/recommended"
+    ],
+    "env": {
+      "node": true
+    },
+    "rules": {
+      "no-undef": "off",
+      "no-unused-vars": "off",
+      "import/no-unresolved": "off",
+      "import/named": "off",
+      "node/no-unsupported-features/es-syntax": [
+        "error",
+        {
+          "ignores": [
+            "asyncFunctions",
+            "modules",
+            "restSpreadProperties"
+          ]
+        }
+      ],
+      "node/shebang": "off",
+      "node/no-missing-import": [
+        "error",
+        {
+          "tryExtensions": [
+            ".ts",
+            ".js"
+          ]
+        }
+      ],
+      "node/no-missing-require": [
+        "error",
+        {
+          "tryExtensions": [
+            ".ts",
+            ".js"
+          ]
+        }
+      ],
+      "promise/avoid-new": "off",
+      "promise/always-return": "off",
+      "promise/no-nesting": "off",
+      "promise/no-callback-in-promise": "off",
+      "prefer-promise-reject-errors": "off",
+      "no-throw-literal": "off",
+      "no-debugger": "off"
+    }
+  },
+  "eslintIgnore": [
+    "build/",
+    "coverage/",
+    "node_modules/"
+  ],
+  "engines": {
+    "node": ">=8.6.0"
+  }
 }
