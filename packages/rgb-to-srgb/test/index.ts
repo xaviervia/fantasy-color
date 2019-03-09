@@ -1,9 +1,9 @@
 import test from 'blue-tape'
 
-import rgb2srgb from '../src'
+import rgbToSrgb from '../src'
 
-test('rgb2srgb: below 9 values', async (t) => {
-  const color = rgb2srgb({
+test('rgbToSrgb: below 9 values', async (t) => {
+  const color = rgbToSrgb({
     red: 7,
     green: 6,
     blue: 2,
@@ -20,8 +20,8 @@ test('rgb2srgb: below 9 values', async (t) => {
   )
 })
 
-test('rgb2srgb: above 9 values', async (t) => {
-  const color = rgb2srgb({
+test('rgbToSrgb: above 9 values', async (t) => {
+  const color = rgbToSrgb({
     red: 78,
     green: 63,
     blue: 22,

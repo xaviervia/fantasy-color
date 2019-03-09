@@ -1,9 +1,9 @@
 {
-  "name": "@fantasy-color/hsv2hsva",
+  "name": "@fantasy-color/rgb-to-srgb",
   "version": "0.0.0",
   "description": "",
   "repository": "xaviervia/fantasy-color",
-  "homepage": "https://github.com/xaviervia/fantasy-color/tree/master/packages/hsv2hsva",
+  "homepage": "https://github.com/xaviervia/fantasy-color/tree/master/packages/rgb-to-srgb",
   "author": "Fernando Via Canel <fernando.via@gmail.com> (https://twitter.com/xaviervia)",
   "license": "MIT",
   "main": "build/",
@@ -17,6 +17,7 @@
     "node": ">=8.6.0"
   },
   "dependencies": {
-    "@babel/runtime": "^7.1.2"
+    "@babel/runtime": "^7.1.2",
+    "@fantasy-color/normalize-rgb": "^0.0.0"
   }
 }

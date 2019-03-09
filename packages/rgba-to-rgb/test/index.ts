@@ -1,9 +1,9 @@
 import test from 'blue-tape'
 
-import rgba2rgb from '../src'
+import rgbaToRgb from '../src'
 
-test('rgba2rgb: standalone', async (t) => {
-  const color = rgba2rgb({
+test('rgbaToRgb: standalone', async (t) => {
+  const color = rgbaToRgb({
     red: 60,
     green: 32,
     blue: 23,
@@ -21,4 +21,4 @@ test('rgba2rgb: standalone', async (t) => {
   )
 })
 
-// test('rgba2rgb: with background')
+// test('rgbaToRgb: with background')

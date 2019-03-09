@@ -1,9 +1,9 @@
 import test from 'blue-tape'
 
-import hsv2hsva from '../src'
+import hsvToHsva from '../src'
 
-test('hsv2hsva', async (t) => {
-  const color = hsv2hsva({
+test('hsvToHsva', async (t) => {
+  const color = hsvToHsva({
     hue: 60,
     saturation: 32,
     value: 23

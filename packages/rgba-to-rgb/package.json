@@ -1,9 +1,9 @@
 {
-  "name": "@fantasy-color/hsva2hsv",
+  "name": "@fantasy-color/rgba-to-rgb",
   "version": "0.0.0",
   "description": "",
   "repository": "xaviervia/fantasy-color",
-  "homepage": "https://github.com/xaviervia/fantasy-color/tree/master/packages/hsva2hsv",
+  "homepage": "https://github.com/xaviervia/fantasy-color/tree/master/packages/rgba-to-rgb",
   "author": "Fernando Via Canel <fernando.via@gmail.com> (https://twitter.com/xaviervia)",
   "license": "MIT",
   "main": "build/",
