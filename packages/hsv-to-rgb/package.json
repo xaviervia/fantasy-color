@@ -1,9 +1,9 @@
 {
-  "name": "@fantasy-color/contrast-ratio-rgb",
+  "name": "@fantasy-color/hsv-to-rgb",
   "version": "0.0.0",
   "description": "",
   "repository": "xaviervia/fantasy-color",
-  "homepage": "https://github.com/xaviervia/fantasy-color/tree/master/packages/contrast-ratio-rgb",
+  "homepage": "https://github.com/xaviervia/fantasy-color/tree/master/packages/hsv-to-rgb",
   "author": "Fernando Via Canel <fernando.via@gmail.com> (https://twitter.com/xaviervia)",
   "license": "MIT",
   "main": "build/",
@@ -17,7 +17,6 @@
     "node": ">=8.6.0"
   },
   "dependencies": {
-    "@babel/runtime": "^7.1.2",
-    "@fantasy-color/contrast-ratio-luminance": "^0.0.0"
+    "@babel/runtime": "^7.1.2"
   }
 }
