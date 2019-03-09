@@ -1,0 +1,22 @@
+{
+  "name": "@fantasy-color/normalize-rgb",
+  "version": "0.0.0",
+  "description": "",
+  "repository": "xaviervia/fantasy-color",
+  "homepage": "https://github.com/xaviervia/fantasy-color/tree/master/packages/normalize-rgb",
+  "author": "Fernando Via Canel <fernando.via@gmail.com> (https://twitter.com/xaviervia)",
+  "license": "MIT",
+  "main": "build/",
+  "files": [
+    "build/"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=8.6.0"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.1.2"
+  }
+}

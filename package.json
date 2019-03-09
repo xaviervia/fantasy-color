@@ -52,7 +52,8 @@
     "spyfn": "^0.1.1",
     "tap-diff": "^0.1.1",
     "typeon": "^0.2.0",
-    "typescript": "^3.3.3333"
+    "typescript": "^3.3.3333",
+    "washington": "^2.0.0"
   },
   "start": {
     "require": [
