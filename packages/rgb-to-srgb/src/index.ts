@@ -1,5 +1,5 @@
 import { RGB } from '@fantasy-color/types/src'
-import normalizeRGB from '@fantasy-color/normalize-rgb/src'
+import normalizeRGB from '@fantasy-color/normalize-rgb'
 
 const NORMALIZED_BELOW_10 = 0.03928
 

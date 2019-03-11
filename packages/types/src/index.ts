@@ -17,3 +17,11 @@ export type HSV = {
 }
 
 export type HSVA = HSV & WithAlpha
+
+export type HCL = {
+  hue: number,
+  chroma: number,
+  luminance: number,
+}
+
+export type HCLA = HCL & WithAlpha

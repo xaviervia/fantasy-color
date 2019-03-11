@@ -6,3 +6,4 @@ coverage/
 .npmrc
 .DS_Store
 *.log
+.next

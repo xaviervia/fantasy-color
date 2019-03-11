@@ -1,9 +1,9 @@
 {
-  "name": "@fantasy-color/luminance-rgb",
+  "name": "@fantasy-color/luminance-srgb",
   "version": "0.0.0",
   "description": "",
   "repository": "xaviervia/fantasy-color",
-  "homepage": "https://github.com/xaviervia/fantasy-color/tree/master/packages/luminance-rgb",
+  "homepage": "https://github.com/xaviervia/fantasy-color/tree/master/packages/luminance-srgb",
   "author": "Fernando Via Canel <fernando.via@gmail.com> (https://twitter.com/xaviervia)",
   "license": "MIT",
   "main": "build/",
@@ -17,8 +17,6 @@
     "node": ">=8.6.0"
   },
   "dependencies": {
-    "@babel/runtime": "^7.1.2",
-    "@fantasy-color/rgb-to-srgb": "^0.0.0",
-    "@fantasy-color/luminance-srgb": "^0.0.0"
+    "@babel/runtime": "^7.1.2"
   }
 }
