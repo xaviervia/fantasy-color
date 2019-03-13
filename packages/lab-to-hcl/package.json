@@ -1,9 +1,9 @@
 {
-  "name": "@fantasy-color/red-for-luminance-srgb",
+  "name": "@fantasy-color/lab-to-hcl",
   "version": "0.0.0",
   "description": "",
   "repository": "xaviervia/fantasy-color",
-  "homepage": "https://github.com/xaviervia/fantasy-color/tree/master/packages/red-for-luminance-srgb",
+  "homepage": "https://github.com/xaviervia/fantasy-color/tree/master/packages/lab-to-hcl",
   "author": "Fernando Via Canel <fernando.via@gmail.com> (https://twitter.com/xaviervia)",
   "license": "MIT",
   "main": "build/",
@@ -17,7 +17,6 @@
     "node": ">=8.6.0"
   },
   "dependencies": {
-    "@babel/runtime": "^7.1.2",
-    "@fantasy-color/normalize-rgb": "^0.0.0"
+    "@babel/runtime": "^7.1.2"
   }
 }

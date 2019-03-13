@@ -25,3 +25,11 @@ export type HCL = {
 }
 
 export type HCLA = HCL & WithAlpha
+
+export type LAB = {
+  luminance: number,
+  a: number,
+  b: number,
+}
+
+export type LABA = LAB & WithAlpha
