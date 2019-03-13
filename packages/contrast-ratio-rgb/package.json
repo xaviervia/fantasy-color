@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.1.2",
+    "@fantasy-color/luminance-rgb": "^0.0.0",
     "@fantasy-color/contrast-ratio-luminance": "^0.0.0"
   }
 }

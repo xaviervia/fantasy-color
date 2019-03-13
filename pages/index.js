@@ -1,29 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import * as d3 from 'd3-color'
-
-const areThereValuesForRgb = (state) =>
-  getValue('red')(state) !== undefined && getValue('red')(state) !== '' &&
-  getValue('green')(state) !== undefined && getValue('green')(state) !== '' &&
-  getValue('blue')(state) !== undefined && getValue('blue')(state) !== ''
-
-const areThereValuesforHcl = (state) =>
-  getValue('hue')(state) !== undefined && getValue('hue')(state) !== '' &&
-  getValue('chroma')(state) !== undefined && getValue('chroma')(state) !== '' &&
-  getValue('luminance')(state) !== undefined && getValue('luminance')(state) !== ''
-
-const d3hclToStateHcl = ({ h, c, l }) => ({
-  hue: String(h), chroma: String(c), luminance: String(l)
-})
-
-const d3rgbToStateRgb = ({ r, g, b }) => ({
-  red: String(r), green: String(g), blue: String(b)
-})
-
-const rgbToD3Rgb = ({ red, green, blue }) =>
-  d3.rgb(red, green, blue)
-
-const hclToD3Hcl = ({ hue, chroma, luminance }) =>
-  d3.rgb(hue, chroma, luminance)
+import contrastRatioRgb from '@fantasy-color/contrast-ratio-rgb'
 
 const getValue = (name) => (state) =>
   state.buffer[name] || state[name]
@@ -33,6 +10,25 @@ const rgbToD3Lab = ({ red, green, blue }) =>
 
 const hclToD3Lab = ({ hue, chroma, luminance }) =>
   d3.lab(d3.hcl(hue, chroma, luminance))
+
+const rgbToLab = color => {
+  const { l: luminance, a, b } = rgbToD3Lab(color)
+
+  return { luminance, a, b }
+}
+
+const hclToLab = color => {
+  const { l: luminance, a, b } = hclToD3Lab(color)
+
+  return { luminance, a, b }
+}
+
+const clipRgb = ({ red, green, blue }) =>
+  ({
+    red: Math.max(Math.min(Math.round(red), 255), 0),
+    green: Math.max(Math.min(Math.round(green), 255), 0),
+    blue: Math.max(Math.min(Math.round(blue), 255), 0),
+  })
 
 const chopDecimals = (howMany) => (number) =>
   Math.floor(number * Math.pow(10, howMany)) / Math.pow(10, howMany)
@@ -49,14 +45,7 @@ const getHcl = ({ luminance, a, b }) => {
   return { hue, chroma, luminance: l }
 }
 
-const printLab = (rgb) => {
-  const {l, a, b} = rgbToD3Lab(rgb)
-  return `${threeDecimals(l)}, ${threeDecimals(a)}, ${threeDecimals(b)}`
-}
-
 const update = (state) => (action) => {
-  console.log(action)
-  console.log(state)
   switch (action.type) {
     case 'TYPE':
       return {
@@ -70,12 +59,12 @@ const update = (state) => (action) => {
     case 'UPDATE_RGB': {
       const newRgb = {
         ...getRgb(state),
-        ...buffer
+        ...state.buffer
       }
 
       return {
         ...state,
-        ...rgbToD3Lab(newRgb),
+        ...rgbToLab(newRgb),
         buffer: {}
       }
     }
@@ -83,12 +72,12 @@ const update = (state) => (action) => {
     case 'UPDATE_HCL': {
       const newHcl = {
         ...getHcl(state),
-        ...buffer
+        ...state.buffer
       }
 
       return {
         ...state,
-        ...hclToD3Lab(newHcl),
+        ...hclToLab(newHcl),
         buffer: {}
       }
     }
@@ -127,18 +116,25 @@ const Input = ({ name, value, dispatch }) => (
 
 const Rgb = ({ luminance, a, b }) => {
   const { red, green, blue } = getRgb({ luminance, a, b })
+  const clipped = clipRgb({ red, green, blue })
 
-  return <p>{threeDecimals(red)}, {threeDecimals(green)}, {threeDecimals(blue)}</p>
+  return <div>
+    <p>{threeDecimals(clipped.red)}, {threeDecimals(clipped.green)}, {threeDecimals(clipped.blue)} - <small>{threeDecimals(red)}, {threeDecimals(green)}, {threeDecimals(blue)}</small></p>
+  </div>
 }
 
 const Hcl = ({ luminance: l, a, b }) => {
-  const { hue, chroma, luminance } = getHcl({ l, a, b })
+  const { hue, chroma, luminance } = getHcl({ luminance: l, a, b })
 
   return <p>{threeDecimals(hue)}, {threeDecimals(chroma)}, {threeDecimals(luminance)}</p>
 }
 
+const Lab = ({ luminance: l, a, b }) => (
+  <p>{threeDecimals(l)}, {threeDecimals(a)}, {threeDecimals(b)}</p>
+)
+
 const Square = ({ luminance, a, b }) => {
-  const { red, green, blue } = getRgb({ luminance, a, b })
+  const { red, green, blue } = clipRgb(getRgb({ luminance, a, b }))
 
   return <div
     style={{
@@ -153,22 +149,38 @@ const Swatch = ({ luminance, a, b }) => (
   <div>
     <Rgb luminance={luminance} a={a} b={b} />
     <Hcl luminance={luminance} a={a} b={b} />
+    <Lab luminance={luminance} a={a} b={b} />
     <Square luminance={luminance} a={a} b={b} />
   </div>
 )
 
-export default () => {
+const DEFAULT_COLOR = {
+  luminance: 100,
+  a: 100,
+  b: 10
+}
+
+const MiniApp = ({ onColor }) => {
   const [state, setState] = useState({
     buffer: {},
-    luminance: 100,
-    a: 100,
-    b: 10
+    ...DEFAULT_COLOR
   })
+
+  useEffect(() => {
+    onColor(state.luminance, state.a, state.b)
+  }, [state.luminance, state.a, state.b])
 
   const dispatch = (action) => setState(update(state)(action))
 
-  const { red, green, blue } = getRgb(state)
-  const { hue, chroma, luminance } = getRgb(state)
+  const { red, green, blue } = {
+    ...getRgb(state),
+    ...state.buffer
+  }
+
+  const { hue, chroma, luminance } = {
+    ...getHcl(state),
+    ...state.buffer
+  }
 
   return <div>
     <Swatch {...state} />
@@ -208,5 +220,45 @@ export default () => {
         Update LAB
       </button>
     </fieldset>
+  </div>
+}
+
+export default () => {
+  const [colors, setColors] = useState({
+    left: DEFAULT_COLOR,
+    right: DEFAULT_COLOR
+  })
+
+  return <div>
+    <p>
+      <strong>
+        {contrastRatioRgb(
+          clipRgb(getRgb(colors.left)),
+          clipRgb(getRgb(colors.right))
+        )}
+      </strong>
+    </p>
+    <table>
+      <tbody>
+        <tr>
+          <td>
+            <MiniApp
+              onColor={(l, a, b) => setColors({
+                ...colors,
+                left: { luminance: l, a, b }
+              })}
+            />
+          </td>
+          <td>
+            <MiniApp
+              onColor={(l, a, b) => setColors({
+                ...colors,
+                right: { luminance: l, a, b }
+              })}
+            />
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 }
