@@ -1,0 +1,22 @@
+{
+  "name": "@fantasy-color/luminance-srgb",
+  "version": "0.0.0",
+  "description": "For a given sRGB color (coded as an RGB object), return its relative luminance",
+  "repository": "xaviervia/fantasy-color",
+  "homepage": "https://github.com/xaviervia/fantasy-color/tree/master/packages/luminance-srgb",
+  "author": "Fernando Via Canel <fernando.via@gmail.com> (https://twitter.com/xaviervia)",
+  "license": "MIT",
+  "main": "build/",
+  "files": [
+    "build/"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=8.6.0"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.1.2"
+  }
+}

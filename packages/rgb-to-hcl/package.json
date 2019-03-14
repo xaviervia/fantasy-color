@@ -1,0 +1,24 @@
+{
+  "name": "@fantasy-color/rgb-to-hcl",
+  "version": "0.0.0",
+  "description": "Transform RGB objects to HCL objects",
+  "repository": "xaviervia/fantasy-color",
+  "homepage": "https://github.com/xaviervia/fantasy-color/tree/master/packages/rgb-to-hcl",
+  "author": "Fernando Via Canel <fernando.via@gmail.com> (https://twitter.com/xaviervia)",
+  "license": "MIT",
+  "main": "build/",
+  "files": [
+    "build/"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=8.6.0"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.1.2",
+    "@fantasy-color/rgb-to-lab": "^0.0.0",
+    "@fantasy-color/lab-to-hcl": "^0.0.0"
+  }
+}

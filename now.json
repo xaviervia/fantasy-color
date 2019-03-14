@@ -1,0 +1,5 @@
+{
+  "version": 2,
+  "name": "fantasy-color",
+  "builds": [{ "src": "next.config.js", "use": "@now/next" }]
+}

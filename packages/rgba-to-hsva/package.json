@@ -1,0 +1,23 @@
+{
+  "name": "@fantasy-color/rgba-to-hsva",
+  "version": "0.0.0",
+  "description": "Transform RGBA objects to HSVA objects",
+  "repository": "xaviervia/fantasy-color",
+  "homepage": "https://github.com/xaviervia/fantasy-color/tree/master/packages/rgba-to-hsva",
+  "author": "Fernando Via Canel <fernando.via@gmail.com> (https://twitter.com/xaviervia)",
+  "license": "MIT",
+  "main": "build/",
+  "files": [
+    "build/"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=8.6.0"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.1.2",
+    "@fantasy-color/normalize-rgba": "^0.0.0"
+  }
+}
