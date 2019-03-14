@@ -1,7 +1,7 @@
 {
   "name": "@fantasy-color/contrast-ratio-rgb",
   "version": "0.0.0",
-  "description": "",
+  "description": "Calculate contrast ratio based on RGB input",
   "repository": "xaviervia/fantasy-color",
   "homepage": "https://github.com/xaviervia/fantasy-color/tree/master/packages/contrast-ratio-rgb",
   "author": "Fernando Via Canel <fernando.via@gmail.com> (https://twitter.com/xaviervia)",

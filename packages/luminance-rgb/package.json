@@ -1,7 +1,7 @@
 {
   "name": "@fantasy-color/luminance-rgb",
   "version": "0.0.0",
-  "description": "",
+  "description": "For a given RGB color, return its relative luminance",
   "repository": "xaviervia/fantasy-color",
   "homepage": "https://github.com/xaviervia/fantasy-color/tree/master/packages/luminance-rgb",
   "author": "Fernando Via Canel <fernando.via@gmail.com> (https://twitter.com/xaviervia)",

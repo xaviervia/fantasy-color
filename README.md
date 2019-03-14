@@ -63,7 +63,7 @@ type LABA = LAB & WithAlpha
 
 - [`@fantasy-color/hcl-to-lab`](packages/hcl-to-lab): Transform `HCL` objects to `LAB` objects
 - [`@fantasy-color/hcl-to-rgb`](packages/hcl-to-rgb): Transform `HCL` objects to `RGB` objects
-- [`@fantasy-color/hsv-to-lab`](packages/hsv-to-lab): Transform `HSV` objects to `LAB` objects
+- [`@fantasy-color/hsv-to-hsva`](packages/hsv-to-hsva): Transform `HSV` objects to `HSVA` objects
 - [`@fantasy-color/hsv-to-rgb`](packages/hsv-to-rgb): Transform `HSV` objects to `RGB` objects
 - [`@fantasy-color/hsva-to-hsv`](packages/hsv-to-hsva): Transform `HSVA` objects to `HSV` objects
 - [`@fantasy-color/hsva-to-rgba`](packages/hsva-to-rgba): Transform `HSVA` objects to `RGBA` objects
@@ -73,7 +73,7 @@ type LABA = LAB & WithAlpha
 - [`@fantasy-color/rgb-to-hsv`](packages/rgb-to-hsv): Transform `RGB` objects to `HSV` objects
 - [`@fantasy-color/rgb-to-lab`](packages/rgb-to-lab): Transform `RGB` objects to `LAB` objects
 - [`@fantasy-color/rgb-to-rgba`](packages/rgb-to-rgba): Transform `RGB` objects to `RGBA` objects
-- [`@fantasy-color/rgb-to-srgb`](packages/rgb-to-srgb): Transform `RGB` objects to `SRGB` objects
+- [`@fantasy-color/rgb-to-srgb`](packages/rgb-to-srgb): Transform `RGB` objects to sRGB objects (coded in the `RGB` type)
 - [`@fantasy-color/rgba-to-hsva`](packages/rgba-to-hsva): Transform `RGBA` objects to `HSVA` objects
 - [`@fantasy-color/rgba-to-rgb`](packages/rgba-to-rgb): Transform `RGBA` objects to `RGB` objects
 

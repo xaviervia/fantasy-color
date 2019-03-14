@@ -1,7 +1,7 @@
 {
   "name": "@fantasy-color/from-rgba",
   "version": "0.0.0",
-  "description": "",
+  "description": "Parse RGBA CSS strings into RGBA objects",
   "repository": "xaviervia/fantasy-color",
   "homepage": "https://github.com/xaviervia/fantasy-color/tree/master/packages/from-rgba",
   "author": "Fernando Via Canel <fernando.via@gmail.com> (https://twitter.com/xaviervia)",

@@ -1,7 +1,7 @@
 {
   "name": "@fantasy-color/rgba-to-rgb",
   "version": "0.0.0",
-  "description": "",
+  "description": "Transform RGBA objects to RGB objects",
   "repository": "xaviervia/fantasy-color",
   "homepage": "https://github.com/xaviervia/fantasy-color/tree/master/packages/rgba-to-rgb",
   "author": "Fernando Via Canel <fernando.via@gmail.com> (https://twitter.com/xaviervia)",

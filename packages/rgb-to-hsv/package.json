@@ -1,7 +1,7 @@
 {
   "name": "@fantasy-color/rgb-to-hsv",
   "version": "0.0.0",
-  "description": "",
+  "description": "Transform RGB objects to HSV objects",
   "repository": "xaviervia/fantasy-color",
   "homepage": "https://github.com/xaviervia/fantasy-color/tree/master/packages/rgb-to-hsv",
   "author": "Fernando Via Canel <fernando.via@gmail.com> (https://twitter.com/xaviervia)",

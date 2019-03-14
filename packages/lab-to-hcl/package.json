@@ -1,7 +1,7 @@
 {
   "name": "@fantasy-color/lab-to-hcl",
   "version": "0.0.0",
-  "description": "",
+  "description": "Transform LAB objects to HCL objects",
   "repository": "xaviervia/fantasy-color",
   "homepage": "https://github.com/xaviervia/fantasy-color/tree/master/packages/lab-to-hcl",
   "author": "Fernando Via Canel <fernando.via@gmail.com> (https://twitter.com/xaviervia)",

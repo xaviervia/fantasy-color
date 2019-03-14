@@ -1,7 +1,7 @@
 {
   "name": "@fantasy-color/contrast-ratio-luminance",
   "version": "0.0.0",
-  "description": "",
+  "description": "Calculate the contrast ratio of two relative luminances",
   "repository": "xaviervia/fantasy-color",
   "homepage": "https://github.com/xaviervia/fantasy-color/tree/master/packages/contrast-ratio-luminance",
   "author": "Fernando Via Canel <fernando.via@gmail.com> (https://twitter.com/xaviervia)",

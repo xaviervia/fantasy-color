@@ -1,9 +1,9 @@
 {
-  "name": "@fantasy-color/luminance-srgb",
+  "name": "@fantasy-color/invert-rgb",
   "version": "0.0.0",
-  "description": "For a given sRGB color (coded as an RGB object), return its relative luminance",
+  "description": "Invert the RGB color object",
   "repository": "xaviervia/fantasy-color",
-  "homepage": "https://github.com/xaviervia/fantasy-color/tree/master/packages/luminance-srgb",
+  "homepage": "https://github.com/xaviervia/fantasy-color/tree/master/packages/invert-rgb",
   "author": "Fernando Via Canel <fernando.via@gmail.com> (https://twitter.com/xaviervia)",
   "license": "MIT",
   "main": "build/",
