@@ -109,8 +109,8 @@ Turns out that sRGB is the color space in which it was specificed the formula fo
 
 This seems to be a historical accident. sRGB appears to be explicitly deprecated by the w3c https://www.w3.org/Graphics/Color/sRGB.html , raising the question on why would WCAG be specified in a way that makes it actually harder to calculate from the standard CSS RGB.
 
-### Why Lab (CIE L*a*b*) and HCL?
+### Why Lab (CIE L\*a\*b\*) and HCL?
 
 In order to get colors with equivalent hue and saturation but different perceptual luminance, none of the most widespread color spaces (rgb, hsl, hsv) are useful. There is the need for a color space that corrects for brightness by hue.
 
-This is what both [CIE L*a*b*](https://en.wikipedia.org/wiki/CIELAB_color_space) and [HCL](https://en.wikipedia.org/wiki/HCL_color_space) achieve.
+This is what both [CIE L\*a\*b\*](https://en.wikipedia.org/wiki/CIELAB_color_space) and [HCL](https://en.wikipedia.org/wiki/HCL_color_space) achieve.
