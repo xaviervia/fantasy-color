@@ -1,6 +1,6 @@
 # @fantasy-color
 
-JavaScript color manipulation packages.
+🌈 Color manipulation functions for JavaScript.
 
 ### Types
 
@@ -48,7 +48,7 @@ type LAB = {
 type LABA = LAB & WithAlpha
 ```
 
-### Contrast Ratio
+### Contrast Ratio calculations
 
 - [`@fantasy-color/contrast-ratio-luminance`](packages/contrast-ratio-luminance): Calculate the [contrast ratio](#contrast-ratio) of two [relative luminances](#relative-luminance)
 - [`@fantasy-color/contrast-ratio-rgb`](packages/contrast-ratio-rgb): Calculate contrast ratio based on RGB input
@@ -56,8 +56,6 @@ type LABA = LAB & WithAlpha
 ### Parsing from CSS string
 
 - [`@fantasy-color/from-hex`](packages/from-hex): Parse HEX CSS strings into `RGB` objects
-- [`@fantasy-color/from-hsv`](packages/from-hsv): Parse HSV strings into `HSV` objects
-- [`@fantasy-color/from-hsva`](packages/from-hsva): Parse HSVA strings into `HSVA` objects
 - [`@fantasy-color/from-rgb`](packages/from-rgb): Parse RGB CSS strings into `RGB` objects
 - [`@fantasy-color/from-rgba`](packages/from-rgba): Parse RGBA CSS strings into `RGBA` objects
 
